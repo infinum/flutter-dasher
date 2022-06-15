@@ -1,0 +1,14 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  strong-mode:
+    implicit-casts: false
+    implicit-dynamic: false
+  exclude:
+    - "lib/**/*.freezed.dart"
+    - "lib/**/*.g.dart"
+    - "lib/**/*.gen.dart"
+
+linter:
+  rules:
+    - prefer_single_quotes
