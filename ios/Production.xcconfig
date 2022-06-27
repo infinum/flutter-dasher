@@ -1,0 +1,5 @@
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"
+#include "Flutter/Generated.xcconfig"
+
+APP_DISPLAY_NAME=Dasher Production
+FLUTTER_TARGET=lib/main_production.dart
