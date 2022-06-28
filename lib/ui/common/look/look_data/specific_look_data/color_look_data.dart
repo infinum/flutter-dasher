@@ -27,16 +27,16 @@ class ColorLookData {
     required this.black10p,
     required this.overlay,
     required this.green,
-    required this.lime,
+    required this.gray,
   });
 
   const ColorLookData.getDefaultWithUserSpecificColor([Color? primaryContainer]) // primaryContainer is assigned as user specific color
       : brightness = Brightness.light,
-        primary = const Color(0xff005670),
+        primary = const Color(0xff1DA1F2),
         primaryContainer = primaryContainer ?? const Color(0xff005670),
         primaryPressed = const Color(0xff043E50),
         primaryDisabled = const Color(0xffc4d6dc),
-        secondary = const Color(0xffAA198D),
+        secondary = const Color(0xff4C9EEB),
         secondaryContainer = const Color(0xffAA198D),
         secondaryPressed = const Color(0xff7c0E66),
         secondaryDisabled = const Color(0xffe3cbde),
@@ -47,7 +47,7 @@ class ColorLookData {
         surface = Colors.white,
         error = const Color(0xffFB3449),
         onError = Colors.white,
-        onBackground = const Color(0xff666666),
+        onBackground = const Color(0xff141619),
         onSurface = const Color(0xff666666),
         onPrimary = Colors.white,
         onSecondary = Colors.white,
@@ -55,7 +55,7 @@ class ColorLookData {
         white10p = const Color(0x1AFFFFFF),
         overlay = const Color(0x8000374F),
         green = const Color(0xff00A03B),
-        lime = const Color(0xffAFCB37);
+        gray = const Color(0xffE7ECF0);
 
   // Material color scheme
   final Brightness brightness;
@@ -77,7 +77,7 @@ class ColorLookData {
   final Color black10p;
   final Color overlay;
   final Color green;
-  final Color lime;
+  final Color gray;
 
   final Color neutral;
 
