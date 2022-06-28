@@ -18,6 +18,7 @@ class DasherApp extends HookConsumerWidget {
     return LookSubtree(
       child: Builder(builder: (context) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           color: Colors.white,
           useInheritedMediaQuery: true,
           navigatorKey: _navigatorKey,

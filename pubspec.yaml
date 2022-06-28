@@ -22,6 +22,10 @@ dependencies:
   japx: ^2.0.4
   loggy: ^2.0.1+1
   hooks_riverpod: ^1.0.4
+  flutter_launcher_icons: ^0.9.3
+  flutter_native_splash: ^2.2.3+1
+  flutter_gen_runner: ^4.3.0
+  flutter_loggy: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -36,3 +40,15 @@ flutter_gen:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+
+flutter_icons:
+  image_path: 'assets/icons/app-icon.png'
+  android: true
+  ios: true
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#1DA1F2"
+  image: assets/images/splash_center_logo.png
