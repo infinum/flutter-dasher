@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dasher/ui/dashboard/dashboard_screen.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:loggy/loggy.dart';
 
 import '../app/di/inject_dependencies.dart' as app;
 import '../common/app_build_mode.dart';
@@ -27,15 +27,7 @@ Future<void> runDasherApp() async {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     runApp(
       ProviderScope(
-        child: DasherApp(
-          Scaffold(
-            body: SafeArea(
-              child: Center(
-                child: Text('Flavor: ${FlavorConfig.instance.name} | Build mode: ${_determineAppBuildMode().toString()}'),
-              ),
-            ),
-          ),
-        ),
+        child: DasherApp(const DashboardScreen()),
       ),
     );
   }, (dynamic error, StackTrace stackTrace) async {
@@ -53,8 +45,8 @@ void _injectAppBuildMode() {
 
 void _setupErrorCapture() {
   FlutterError.onError = (FlutterErrorDetails details) async {
-    final flavour = GetIt.instance.get<FlavorConfig>();
-    if (flavour.flavor == AppBuildMode.debug) {
+    final appBuildMode = GetIt.instance.get<AppBuildMode>();
+    if (appBuildMode == AppBuildMode.debug) {
       FlutterError.dumpErrorToConsole(details);
     } else {
       Zone.current.handleUncaughtError(details.exception, details.stack ?? StackTrace.empty);
@@ -76,15 +68,5 @@ AppBuildMode _determineAppBuildMode() {
     return AppBuildMode.profile;
   } else {
     return AppBuildMode.release;
-  }
-}
-
-LogLevel _determineMinimumLogLevel() {
-  final appBuildMode = GetIt.instance.get<AppBuildMode>();
-  switch (appBuildMode) {
-    case AppBuildMode.debug:
-      return LogLevel.all;
-    default:
-      return LogLevel.warning;
   }
 }

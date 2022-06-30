@@ -13,7 +13,6 @@ dependencies:
   flutter_hooks: ^0.18.4
   flutter_inappwebview: ^5.4.3+7
   flutter_svg: ^1.1.0
-  freezed: ^2.0.3+1
   get_it: ^7.2.0
   riverpod: ^1.0.3
   dio: ^4.0.6
@@ -26,6 +25,7 @@ dependencies:
   flutter_native_splash: ^2.2.3+1
   flutter_gen_runner: ^4.3.0
   flutter_loggy: ^2.0.1
+  freezed_annotation: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -33,6 +33,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_gen: ^4.3.0
   build_runner: ^2.1.11
+  freezed: ^2.0.3+1
 
 flutter_gen:
   integrations:
@@ -42,6 +43,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/svg/
 
 flutter_icons:
   image_path: 'assets/icons/app-icon.png'
