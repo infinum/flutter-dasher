@@ -47,12 +47,20 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/tweet_share.svg
   SvgGenImage get tweetShare => const SvgGenImage('assets/svg/tweet_share.svg');
+
+  /// File path: assets/images/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
+
+  /// File path: assets/images/splash_center_logo.png
+  AssetGenImage get splashCenterLogo =>
+      const AssetGenImage('assets/images/splash_center_logo.png');
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsSvgGen svg = $AssetsSvgGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
