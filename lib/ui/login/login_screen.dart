@@ -18,7 +18,7 @@ class LoginScreen extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const HeaderIllustration(),
+            const _HeaderIllustration(),
             const SizedBox(height: 24),
             Text(
               'Dasher',
@@ -61,8 +61,8 @@ class LoginScreen extends HookWidget {
   }
 }
 
-class HeaderIllustration extends StatelessWidget {
-  const HeaderIllustration({
+class _HeaderIllustration extends StatelessWidget {
+  const _HeaderIllustration({
     Key? key,
   }) : super(key: key);
 
