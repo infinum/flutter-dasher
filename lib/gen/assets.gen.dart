@@ -11,12 +11,23 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
+class $AssetsPngGen {
+  const $AssetsPngGen();
+
+  /// File path: assets/png/splash_center_logo.png
+  AssetGenImage get splashCenterLogo =>
+      const AssetGenImage('assets/png/splash_center_logo.png');
+}
+
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
   /// File path: assets/svg/button_new_tweet.svg
   SvgGenImage get buttonNewTweet =>
       const SvgGenImage('assets/svg/button_new_tweet.svg');
+
+  /// File path: assets/svg/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/svg/logo.svg');
 
   /// File path: assets/svg/navigation_bell.svg
   SvgGenImage get navigationBell =>
@@ -47,20 +58,13 @@ class $AssetsSvgGen {
 
   /// File path: assets/svg/tweet_share.svg
   SvgGenImage get tweetShare => const SvgGenImage('assets/svg/tweet_share.svg');
-
-  /// File path: assets/images/logo.svg
-  SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
-
-  /// File path: assets/images/splash_center_logo.png
-  AssetGenImage get splashCenterLogo =>
-      const AssetGenImage('assets/images/splash_center_logo.png');
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {

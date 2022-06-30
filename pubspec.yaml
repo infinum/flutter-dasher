@@ -42,11 +42,11 @@ flutter_gen:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
+    - assets/png/
     - assets/svg/
 
 flutter_icons:
-  image_path: 'assets/icons/app-icon.png'
+  image_path: 'assets/app_icons/app_icon.png'
   android: true
   ios: true
   remove_alpha_ios: true
