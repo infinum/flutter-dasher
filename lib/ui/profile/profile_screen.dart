@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
@@ -211,7 +212,7 @@ class _HeaderBar extends SliverPersistentHeaderDelegate {
               decoration: BoxDecoration(
                 color: Look.of(context).color.onSurface,
                 image: DecorationImage(
-                  image: NetworkImage(avatarURL),
+                  image: CachedNetworkImageProvider(avatarURL),
                   fit: BoxFit.cover,
                 ),
                 shape: BoxShape.circle,

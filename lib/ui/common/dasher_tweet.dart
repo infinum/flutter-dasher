@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dasher/gen/assets.gen.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
@@ -42,7 +43,7 @@ class DasherTweet extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 27,
-            backgroundImage: NetworkImage(avatarURL),
+            backgroundImage: CachedNetworkImageProvider(avatarURL),
             backgroundColor: Colors.white,
           ),
           Flexible(

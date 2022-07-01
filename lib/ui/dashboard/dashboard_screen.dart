@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
 import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
@@ -26,12 +27,12 @@ class DashboardScreen extends HookWidget {
         title: Row(
           children: [
             Container(
-              margin: const EdgeInsets.only(right: 30.0),
+              margin: const EdgeInsets.only(right: 30.0, left: 4),
               child: GestureDetector(
                 onTap: () => Navigator.of(context).push<void>(ProfileScreen.route()),
                 child: const CircleAvatar(
                   radius: 16.0,
-                  backgroundImage: NetworkImage('https://source.unsplash.com/random/32x32?sig=1'),
+                  backgroundImage: CachedNetworkImageProvider('https://source.unsplash.com/random/32x32?sig=1'),
                   backgroundColor: Colors.white,
                 ),
               ),
