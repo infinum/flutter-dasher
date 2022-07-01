@@ -30,6 +30,9 @@ class ColorLookData {
     required this.gray,
     required this.symbolGray,
     required this.border,
+    required this.header,
+    required this.onHeader,
+    required this.black,
   });
 
   const ColorLookData.getDefaultWithUserSpecificColor([Color? primaryContainer]) // primaryContainer is assigned as user specific color
@@ -53,13 +56,16 @@ class ColorLookData {
         onSurface = const Color(0xff666666),
         onPrimary = Colors.white,
         onSecondary = Colors.white,
+        onHeader = const Color(0xffDEDEDE),
         black10p = const Color(0x1A000000),
+        black = const Color(0xFF000000),
         white10p = const Color(0x1AFFFFFF),
         overlay = const Color(0x8000374F),
         green = const Color(0xff00A03B),
         gray = const Color(0xffE7ECF0),
         symbolGray = const Color(0xff687684),
-        border = const Color(0xffCED5DC);
+        border = const Color(0xffCED5DC),
+        header = const Color(0xff1F1F1F);
 
   // Material color scheme
   final Brightness brightness;
@@ -79,6 +85,7 @@ class ColorLookData {
   // Other colors
   final Color white10p;
   final Color black10p;
+  final Color black;
   final Color overlay;
   final Color green;
   final Color gray;
@@ -94,4 +101,6 @@ class ColorLookData {
   final Color tertiaryDisabled;
   final Color symbolGray;
   final Color border;
+  final Color header;
+  final Color onHeader;
 }
