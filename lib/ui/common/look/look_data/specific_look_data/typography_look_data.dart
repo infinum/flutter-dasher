@@ -16,6 +16,9 @@ class TypographyLookData {
     required this.caption,
     required this.overline,
     required this.label,
+    required this.tweetBody,
+    required this.tweetBold,
+    required this.symbolLabel,
   });
 
   const TypographyLookData.getDefault()
@@ -70,6 +73,21 @@ class TypographyLookData {
           fontSize: 16,
           letterSpacing: -0.3,
           fontWeight: FontWeight.w400,
+        ),
+        tweetBody = const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.3,
+        ),
+        tweetBold = const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.3,
+        ),
+        symbolLabel = const TextStyle(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.3,
         );
 
   final String primaryFontFamily;
@@ -90,4 +108,8 @@ class TypographyLookData {
   final TextStyle overline;
 
   final TextStyle label;
+
+  final TextStyle tweetBody;
+  final TextStyle tweetBold;
+  final TextStyle symbolLabel;
 }

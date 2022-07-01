@@ -11,21 +11,60 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
+class $AssetsPngGen {
+  const $AssetsPngGen();
 
-  /// File path: assets/images/logo.svg
-  SvgGenImage get logo => const SvgGenImage('assets/images/logo.svg');
-
-  /// File path: assets/images/splash_center_logo.png
+  /// File path: assets/png/splash_center_logo.png
   AssetGenImage get splashCenterLogo =>
-      const AssetGenImage('assets/images/splash_center_logo.png');
+      const AssetGenImage('assets/png/splash_center_logo.png');
+}
+
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/button_new_tweet.svg
+  SvgGenImage get buttonNewTweet =>
+      const SvgGenImage('assets/svg/button_new_tweet.svg');
+
+  /// File path: assets/svg/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/svg/logo.svg');
+
+  /// File path: assets/svg/navigation_bell.svg
+  SvgGenImage get navigationBell =>
+      const SvgGenImage('assets/svg/navigation_bell.svg');
+
+  /// File path: assets/svg/navigation_home.svg
+  SvgGenImage get navigationHome =>
+      const SvgGenImage('assets/svg/navigation_home.svg');
+
+  /// File path: assets/svg/navigation_mail.svg
+  SvgGenImage get navigationMail =>
+      const SvgGenImage('assets/svg/navigation_mail.svg');
+
+  /// File path: assets/svg/navigation_search.svg
+  SvgGenImage get navigationSearch =>
+      const SvgGenImage('assets/svg/navigation_search.svg');
+
+  /// File path: assets/svg/tweet_comment.svg
+  SvgGenImage get tweetComment =>
+      const SvgGenImage('assets/svg/tweet_comment.svg');
+
+  /// File path: assets/svg/tweet_like.svg
+  SvgGenImage get tweetLike => const SvgGenImage('assets/svg/tweet_like.svg');
+
+  /// File path: assets/svg/tweet_retweet.svg
+  SvgGenImage get tweetRetweet =>
+      const SvgGenImage('assets/svg/tweet_retweet.svg');
+
+  /// File path: assets/svg/tweet_share.svg
+  SvgGenImage get tweetShare => const SvgGenImage('assets/svg/tweet_share.svg');
 }
 
 class Assets {
   Assets._();
 
-  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsPngGen png = $AssetsPngGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {

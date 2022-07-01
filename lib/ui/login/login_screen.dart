@@ -76,7 +76,7 @@ class _HeaderIllustration extends StatelessWidget {
         children: [
           Positioned(
             bottom: 44,
-            child: Assets.images.logo.svg(),
+            child: Assets.svg.logo.svg(),
           ),
         ],
       ),
