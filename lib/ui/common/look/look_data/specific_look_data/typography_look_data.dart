@@ -19,6 +19,7 @@ class TypographyLookData {
     required this.tweetBody,
     required this.tweetBold,
     required this.symbolLabel,
+    required this.headerLabel,
   });
 
   const TypographyLookData.getDefault()
@@ -33,8 +34,9 @@ class TypographyLookData {
           letterSpacing: -0.75,
         ),
         h3 = const TextStyle(
-          fontSize: 24,
-          letterSpacing: -0.25,
+          fontWeight: FontWeight.w800,
+          fontSize: 22,
+          letterSpacing: -0.3,
         ),
         h4 = const TextStyle(
           fontWeight: FontWeight.bold,
@@ -88,6 +90,11 @@ class TypographyLookData {
           fontSize: 12,
           fontWeight: FontWeight.w400,
           letterSpacing: -0.3,
+        ),
+        headerLabel = const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.w700,
+          letterSpacing: -0.9,
         );
 
   final String primaryFontFamily;
@@ -112,4 +119,5 @@ class TypographyLookData {
   final TextStyle tweetBody;
   final TextStyle tweetBold;
   final TextStyle symbolLabel;
+  final TextStyle headerLabel;
 }
