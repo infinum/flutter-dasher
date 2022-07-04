@@ -20,6 +20,7 @@ class TypographyLookData {
     required this.tweetBold,
     required this.symbolLabel,
     required this.headerLabel,
+    required this.lightButton,
   });
 
   const TypographyLookData.getDefault()
@@ -65,7 +66,9 @@ class TypographyLookData {
           letterSpacing: -0.1,
         ),
         caption = const TextStyle(
-          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          fontSize: 19,
+          letterSpacing: -0.5,
         ),
         overline = const TextStyle(
           fontSize: 12,
@@ -95,6 +98,11 @@ class TypographyLookData {
           fontSize: 22,
           fontWeight: FontWeight.w700,
           letterSpacing: -0.9,
+        ),
+        lightButton = const TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.w400,
+          letterSpacing: -0.3,
         );
 
   final String primaryFontFamily;
@@ -120,4 +128,5 @@ class TypographyLookData {
   final TextStyle tweetBold;
   final TextStyle symbolLabel;
   final TextStyle headerLabel;
+  final TextStyle lightButton;
 }
