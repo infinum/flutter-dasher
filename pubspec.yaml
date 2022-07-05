@@ -27,6 +27,8 @@ dependencies:
   flutter_loggy: ^2.0.1
   freezed_annotation: ^2.0.3
   cached_network_image: ^3.2.1
+  twitter_oauth2_pkce: ^0.3.0
+  twitter_api_v2: ^2.8.1
 
 dev_dependencies:
   flutter_test:
