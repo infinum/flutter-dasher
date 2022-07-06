@@ -6,6 +6,7 @@ import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweet.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
 import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
+import 'package:flutter_dasher/ui/profile/provider/profile_request_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -22,50 +23,53 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider);
+    final tweets = ref.watch(profileRequestProvider).tweets;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
-        body: CustomScrollView(
-          scrollDirection: Axis.vertical,
-          slivers: [
-            SliverPersistentHeader(
-              delegate: _HeaderBar(
-                expandedHeight: 138,
-                shrinkHeight: 100,
-                profileName: user?.name,
-                avatarURL: user?.imageUrl,
+        body: RefreshIndicator(
+          onRefresh: ref.read(profileRequestProvider).fetchProfileTweets,
+          child: CustomScrollView(
+            scrollDirection: Axis.vertical,
+            slivers: [
+              SliverPersistentHeader(
+                delegate: _HeaderBar(
+                  expandedHeight: 138,
+                  shrinkHeight: 100,
+                  profileName: user?.name,
+                  avatarURL: user?.imageUrl,
+                ),
+                pinned: true,
               ),
-              pinned: true,
-            ),
-            SliverToBoxAdapter(
-              child: _ProfileInfo(
-                name: user?.name,
-                usernameTag: '@${user?.username}',
-                bio: user?.description,
-                following: user?.following.toString(),
-                followers: user?.followers.toString(),
+              SliverToBoxAdapter(
+                child: _ProfileInfo(
+                  name: user?.name,
+                  usernameTag: '@${user?.username}',
+                  bio: user?.description,
+                  following: user?.following.toString(),
+                  followers: user?.followers.toString(),
+                ),
               ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return const DasherTweet(
-                    avatarURL: 'https://source.unsplash.com/random/200x200?sig=2',
-                    username: 'Username',
-                    usernameTag: '@username',
-                    tweetTime: '30m',
-                    tweetText:
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                    commentsCount: '15',
-                    retweetsCount: '20',
-                    likesCount: '25',
-                  );
-                },
-                childCount: 10, // 1000 list items
-              ),
-            )
-          ],
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return DasherTweet(
+                      avatarURL: tweets[index].profileImageUrl,
+                      name: tweets[index].name,
+                      usernameTag: tweets[index].username,
+                      createdAt: tweets[index].createdAt,
+                      tweetText: tweets[index].text,
+                      commentsCount: tweets[index].replyCount.toString(),
+                      retweetsCount: tweets[index].retweetCount.toString(),
+                      likesCount: tweets[index].likeCount.toString(),
+                    );
+                  },
+                  childCount: tweets.length, // 1000 list items
+                ),
+              )
+            ],
+          ),
         ),
         floatingActionButton: const DasherNewTweetButton(),
         bottomNavigationBar: const DasherBottomNavigationBar(),

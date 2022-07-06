@@ -21,9 +21,9 @@ class DasherTweetsList extends ConsumerWidget {
             itemBuilder: (context, index) {
               return DasherTweet(
                 avatarURL: feed[index].profileImageUrl,
-                username: feed[index].name,
+                name: feed[index].name,
                 usernameTag: feed[index].username,
-                tweetTime: feed[index].createdAt,
+                createdAt: feed[index].createdAt,
                 tweetText: feed[index].text,
                 commentsCount: feed[index].replyCount.toString(),
                 retweetsCount: feed[index].retweetCount.toString(),

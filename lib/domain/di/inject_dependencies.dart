@@ -3,6 +3,8 @@ import 'package:flutter_dasher/domain/interactor/dashboard/fetch_feed_interactor
 import 'package:flutter_dasher/domain/interactor/dashboard/fetch_feed_interactor_impl.dart';
 import 'package:flutter_dasher/domain/interactor/login/login_interactor.dart';
 import 'package:flutter_dasher/domain/interactor/login/login_interactor_impl.dart';
+import 'package:flutter_dasher/domain/interactor/profile/profile_tweets_interactor.dart';
+import 'package:flutter_dasher/domain/interactor/profile/profile_tweets_interactor_impl.dart';
 import 'package:get_it/get_it.dart';
 
 void injectDependencies(GetIt getIt) {
@@ -19,6 +21,12 @@ void injectDependencies(GetIt getIt) {
 
   getIt.registerFactory<FetchFeedInteractor>(
     () => FetchFeedInteractorImpl(
+      getIt.get(),
+    ),
+  );
+
+  getIt.registerFactory<ProfileTweetsInteractor>(
+    () => ProfileTweetsInteractorImpl(
       getIt.get(),
     ),
   );
