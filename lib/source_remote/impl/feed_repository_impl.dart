@@ -1,5 +1,7 @@
 import 'package:flutter_dasher/common/model/tweet.dart';
+import 'package:flutter_dasher/domain/data/user_data_holder.dart';
 import 'package:flutter_dasher/domain/repository/feed_repository.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart';
 
@@ -10,8 +12,10 @@ class FeedRepositoryImpl implements FeedRepository {
 
   @override
   Future<List<Tweet>> fetchFeedTimeline() async {
+    var user = GetIt.instance.get<UserDataHolder>().user;
+
     final response = await twitterApi.tweetsService.lookupHomeTimeline(
-      userId: '219787739',
+      userId: user!.id,
       tweetFields: [
         TweetField.publicMetrics,
         TweetField.createdAt,

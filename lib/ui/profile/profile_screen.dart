@@ -5,8 +5,10 @@ import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
 import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweet.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
+import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   static Route route() {
@@ -18,7 +20,9 @@ class ProfileScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(currentUserProvider);
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
@@ -29,18 +33,18 @@ class ProfileScreen extends StatelessWidget {
               delegate: _HeaderBar(
                 expandedHeight: 138,
                 shrinkHeight: 100,
-                profileName: 'Profile Name',
-                avatarURL: 'https://source.unsplash.com/random/200x200?sig=1',
+                profileName: user?.name,
+                avatarURL: user?.imageUrl,
               ),
               pinned: true,
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: _ProfileInfo(
-                username: 'Username',
-                usernameTag: '@username',
-                bio: 'Digital Goodies Team - Web & Mobile UI/UX development; Graphics; Illustrations',
-                following: '217',
-                followers: '99',
+                name: user?.name,
+                usernameTag: '@${user?.username}',
+                bio: user?.description,
+                following: user?.following.toString(),
+                followers: user?.followers.toString(),
               ),
             ),
             SliverList(
@@ -73,18 +77,18 @@ class ProfileScreen extends StatelessWidget {
 class _ProfileInfo extends StatelessWidget {
   const _ProfileInfo({
     Key? key,
-    required this.username,
+    required this.name,
     required this.usernameTag,
     this.bio,
     required this.following,
     required this.followers,
   }) : super(key: key);
 
-  final String username;
-  final String usernameTag;
+  final String? name;
+  final String? usernameTag;
   final String? bio;
-  final String following;
-  final String followers;
+  final String? following;
+  final String? followers;
 
   @override
   Widget build(BuildContext context) {
@@ -99,12 +103,12 @@ class _ProfileInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            username,
+            name!,
             style: Look.of(context).typography.h3.copyWith(color: Look.of(context).color.onBackground),
           ),
           const SizedBox(height: 4),
           Text(
-            usernameTag,
+            usernameTag!,
             style: Look.of(context).typography.tweetBody.copyWith(color: Look.of(context).color.symbolGray),
           ),
           const SizedBox(height: 15),
@@ -169,8 +173,8 @@ class _HeaderBar extends SliverPersistentHeaderDelegate {
 
   final double expandedHeight;
   final double shrinkHeight;
-  final String profileName;
-  final String avatarURL;
+  final String? profileName;
+  final String? avatarURL;
 
   // Distance in points from maximum expanded header to minimum shrunk header
   double get _distanceToShrink => expandedHeight - shrinkHeight;
@@ -199,7 +203,7 @@ class _HeaderBar extends SliverPersistentHeaderDelegate {
         Positioned(
           top: _calculateHeaderTextTopPosition(shrinkOffset),
           child: Text(
-            profileName,
+            profileName!,
             style: Look.of(context).typography.headerLabel.copyWith(color: Look.of(context).color.onHeader),
           ),
         ),
@@ -212,8 +216,8 @@ class _HeaderBar extends SliverPersistentHeaderDelegate {
               decoration: BoxDecoration(
                 color: Look.of(context).color.onSurface,
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(avatarURL),
-                  fit: BoxFit.cover,
+                  image: CachedNetworkImageProvider(avatarURL!),
+                  fit: BoxFit.contain,
                 ),
                 shape: BoxShape.circle,
                 border: Border.all(
