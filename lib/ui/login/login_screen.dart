@@ -18,6 +18,7 @@ class LoginScreen extends HookConsumerWidget {
     ref.listen<LoginRequestProvider>(loginRequestProvider, (_, provider) {
       provider.state.whenOrNull(
         success: (_) => Navigator.of(context).push<void>(DashboardScreen.route()),
+        failure: (_) => print('Error'),
       );
     });
 
@@ -45,10 +46,11 @@ class LoginScreen extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 22,
+                vertical: 22,
               ),
               child: PrimaryButton(
-                child: const Text('Login with Twitter'),
                 onPressed: _provider.onLoginClicked,
+                child: const Text('Login with Twitter'),
               ),
             ),
           ],
