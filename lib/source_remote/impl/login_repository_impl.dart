@@ -1,6 +1,7 @@
+import 'package:flutter_dasher/common/model/user.dart';
 import 'package:flutter_dasher/domain/repository/login_repository.dart';
 import 'package:get_it/get_it.dart';
-import 'package:twitter_api_v2/twitter_api_v2.dart';
+import 'package:twitter_api_v2/twitter_api_v2.dart' as v2;
 import 'package:twitter_oauth2_pkce/twitter_oauth2_pkce.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
@@ -9,11 +10,22 @@ class LoginRepositoryImpl implements LoginRepository {
   final TwitterOAuth2Client twitterOAuth2Client;
 
   @override
-  Future<void> login() async {
+  Future<User> login() async {
     final response = await twitterOAuth2Client.executeAuthCodeFlowWithPKCE(
       scopes: Scope.values,
     );
 
-    GetIt.instance.registerSingleton(TwitterApi(bearerToken: response.accessToken));
+    final twitter = v2.TwitterApi(bearerToken: response.accessToken);
+
+    GetIt.instance.registerSingleton(twitter);
+
+    final userResponse = await twitter.usersService.lookupMe(userFields: [v2.UserField.profileImageUrl]);
+
+    return User(
+      id: userResponse.data.id,
+      name: userResponse.data.name,
+      username: userResponse.data.username,
+      imageUrl: userResponse.data.profileImageUrl,
+    );
   }
 }
