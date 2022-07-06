@@ -31,7 +31,7 @@ class LoginRepositoryImpl implements LoginRepository {
       id: userResponse.data.id,
       name: userResponse.data.name,
       username: userResponse.data.username,
-      imageUrl: userResponse.data.profileImageUrl,
+      imageUrl: userResponse.data.profileImageUrl?.replaceAll('normal', '400x400'),
       description: userResponse.data.description,
       followers: userResponse.data.publicMetrics?.followersCount,
       following: userResponse.data.publicMetrics?.followingCount,
