@@ -19,13 +19,22 @@ class LoginRepositoryImpl implements LoginRepository {
 
     GetIt.instance.registerSingleton(twitter);
 
-    final userResponse = await twitter.usersService.lookupMe(userFields: [v2.UserField.profileImageUrl]);
+    final userResponse = await twitter.usersService.lookupMe(
+      userFields: [
+        v2.UserField.profileImageUrl,
+        v2.UserField.description,
+        v2.UserField.publicMetrics,
+      ],
+    );
 
     return User(
       id: userResponse.data.id,
       name: userResponse.data.name,
       username: userResponse.data.username,
-      imageUrl: userResponse.data.profileImageUrl,
+      imageUrl: userResponse.data.profileImageUrl?.replaceAll('normal', '400x400'),
+      description: userResponse.data.description,
+      followers: userResponse.data.publicMetrics?.followersCount,
+      following: userResponse.data.publicMetrics?.followingCount,
     );
   }
 }

@@ -1,20 +1,20 @@
 import 'package:flutter_dasher/common/model/tweet.dart';
 import 'package:flutter_dasher/domain/data/user_data_holder.dart';
-import 'package:flutter_dasher/domain/repository/feed_repository.dart';
+import 'package:flutter_dasher/domain/repository/profile_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart';
 
-class FeedRepositoryImpl implements FeedRepository {
-  FeedRepositoryImpl(this.twitterApi);
+class ProfileRepositoryImpl implements ProfileRepository {
+  ProfileRepositoryImpl(this.twitterApi);
 
   final TwitterApi twitterApi;
 
   @override
-  Future<List<Tweet>> fetchFeedTimeline() async {
+  Future<List<Tweet>> fetchProfileTweets() async {
     var user = GetIt.instance.get<UserDataHolder>().user;
 
-    final response = await twitterApi.tweetsService.lookupHomeTimeline(
+    final response = await twitterApi.tweetsService.lookupTweets(
       userId: user!.id,
       tweetFields: [
         TweetField.publicMetrics,
@@ -29,18 +29,13 @@ class FeedRepositoryImpl implements FeedRepository {
       ],
     );
 
-    return _getTweetsListWithAuthors(response);
-  }
-
-  List<Tweet> _getTweetsListWithAuthors(TwitterResponse<List<TweetData>, TweetMeta> response) {
     return response.data.map((tweet) {
-      final UserData user = _getUserForTweet(response.includes?.users, tweet);
+      final UserData? user = response.includes?.users?.singleWhere((user) => user.id == tweet.authorId);
 
-      // Extend tweet data with user data related to that tweet
       return Tweet(
         tweet.id,
         tweet.text,
-        user.profileImageUrl,
+        user!.profileImageUrl,
         user.name,
         user.username,
         tweet.publicMetrics!.likeCount,
@@ -50,7 +45,4 @@ class FeedRepositoryImpl implements FeedRepository {
       );
     }).toList();
   }
-
-  //  From authorId inside the tweet find a matching user from the list of all unique users who posted those tweets
-  UserData _getUserForTweet(List<UserData>? users, TweetData tweet) => users!.singleWhere((user) => user.id == tweet.authorId);
 }

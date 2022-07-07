@@ -45,10 +45,11 @@ class LoginScreen extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 22,
+                vertical: 22,
               ),
               child: PrimaryButton(
-                child: const Text('Login with Twitter'),
                 onPressed: _provider.onLoginClicked,
+                child: const Text('Login with Twitter'),
               ),
             ),
           ],

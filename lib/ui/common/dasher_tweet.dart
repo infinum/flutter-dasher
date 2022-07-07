@@ -8,9 +8,9 @@ class DasherTweet extends StatelessWidget {
   const DasherTweet({
     Key? key,
     required this.avatarURL,
-    required this.username,
+    required this.name,
     required this.usernameTag,
-    required this.tweetTime,
+    required this.createdAt,
     required this.tweetText,
     required this.commentsCount,
     required this.retweetsCount,
@@ -18,9 +18,9 @@ class DasherTweet extends StatelessWidget {
   }) : super(key: key);
 
   final String? avatarURL;
-  final String? username;
+  final String? name;
   final String? usernameTag;
-  final String? tweetTime;
+  final String? createdAt;
   final String tweetText;
   final String commentsCount;
   final String retweetsCount;
@@ -62,14 +62,14 @@ class DasherTweet extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        username!,
+                        name!,
                         style: Look.of(context).typography.tweetBold.copyWith(color: Look.of(context).color.onBackground),
                       ),
                       Flexible(
                         child: Container(
                           margin: const EdgeInsets.only(left: 5.0),
                           child: Text(
-                            '$usernameTag · $tweetTime',
+                            '$usernameTag · $createdAt',
                             style: Look.of(context).typography.tweetBody.copyWith(color: Look.of(context).color.symbolGray),
                             overflow: TextOverflow.ellipsis,
                           ),

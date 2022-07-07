@@ -54,7 +54,7 @@ class _ProfilePicture extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageUrl = ref.watch(currentUserProvider)?.imageUrl;
+    final imageUrl = ref.watch(currentUserProvider).imageUrl;
 
     return GestureDetector(
       onTap: () => Navigator.of(context).push<void>(ProfileScreen.route()),

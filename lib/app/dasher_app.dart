@@ -37,7 +37,7 @@ class DasherApp extends HookConsumerWidget {
 
   void _createErrorWidget(BuildContext context) {
     ErrorWidget.builder = (FlutterErrorDetails errorDetails) {
-      return Card(margin: const EdgeInsets.all(16), child: GenericError('Unexpected error'));
+      return const Card(margin: EdgeInsets.all(16), child: GenericError('Unexpected error'));
     };
   }
 }
