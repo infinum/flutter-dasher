@@ -17,10 +17,10 @@ class DasherTweet extends StatelessWidget {
     required this.likesCount,
   }) : super(key: key);
 
-  final String avatarURL;
-  final String username;
-  final String usernameTag;
-  final String tweetTime;
+  final String? avatarURL;
+  final String? username;
+  final String? usernameTag;
+  final String? tweetTime;
   final String tweetText;
   final String commentsCount;
   final String retweetsCount;
@@ -41,11 +41,17 @@ class DasherTweet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 27,
-            backgroundImage: CachedNetworkImageProvider(avatarURL),
-            backgroundColor: Colors.white,
-          ),
+          if (avatarURL != null)
+            CircleAvatar(
+              radius: 27,
+              backgroundImage: CachedNetworkImageProvider(avatarURL!),
+              backgroundColor: Colors.white,
+            ),
+          if (avatarURL == null)
+            const CircleAvatar(
+              radius: 27,
+              backgroundColor: Colors.grey,
+            ),
           Flexible(
             child: Container(
               margin: const EdgeInsets.only(left: 10.0),
@@ -56,14 +62,17 @@ class DasherTweet extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        username,
+                        username!,
                         style: Look.of(context).typography.tweetBold.copyWith(color: Look.of(context).color.onBackground),
                       ),
-                      Container(
-                        margin: const EdgeInsets.only(left: 5.0),
-                        child: Text(
-                          '$usernameTag · $tweetTime',
-                          style: Look.of(context).typography.tweetBody.copyWith(color: Look.of(context).color.symbolGray),
+                      Flexible(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 5.0),
+                          child: Text(
+                            '$usernameTag · $tweetTime',
+                            style: Look.of(context).typography.tweetBody.copyWith(color: Look.of(context).color.symbolGray),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       )
                     ],
@@ -121,7 +130,7 @@ class _IconText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 40.0),
+      padding: const EdgeInsets.only(right: 20.0),
       child: Row(
         children: [
           icon,

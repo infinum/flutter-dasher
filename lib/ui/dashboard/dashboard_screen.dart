@@ -4,10 +4,11 @@ import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
 import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweets_list.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
+import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
 import 'package:flutter_dasher/ui/profile/profile_screen.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class DashboardScreen extends HookWidget {
+class DashboardScreen extends StatelessWidget {
   const DashboardScreen({
     Key? key,
   }) : super(key: key);
@@ -25,20 +26,10 @@ class DashboardScreen extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(right: 30.0, left: 4),
-              child: GestureDetector(
-                onTap: () => Navigator.of(context).push<void>(ProfileScreen.route()),
-                child: const CircleAvatar(
-                  radius: 16.0,
-                  backgroundImage: CachedNetworkImageProvider('https://source.unsplash.com/random/32x32?sig=1'),
-                  backgroundColor: Colors.white,
-                ),
-              ),
-            ),
-          ],
+        title: Container(
+          alignment: Alignment.centerLeft,
+          margin: const EdgeInsets.only(right: 30.0, left: 4),
+          child: const _ProfilePicture(),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -52,6 +43,26 @@ class DashboardScreen extends HookWidget {
       body: const DasherTweetsList(),
       floatingActionButton: const DasherNewTweetButton(),
       bottomNavigationBar: const DasherBottomNavigationBar(),
+    );
+  }
+}
+
+class _ProfilePicture extends ConsumerWidget {
+  const _ProfilePicture({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageUrl = ref.watch(currentUserProvider)?.imageUrl;
+
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push<void>(ProfileScreen.route()),
+      child: CircleAvatar(
+        radius: 16.0,
+        backgroundImage: CachedNetworkImageProvider(imageUrl!),
+        backgroundColor: Colors.white,
+      ),
     );
   }
 }
