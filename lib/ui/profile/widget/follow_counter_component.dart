@@ -8,8 +8,8 @@ class FollowCounter extends StatelessWidget {
     required this.text,
   }) : super(key: key);
 
-  final String? counter;
-  final String? text;
+  final String counter;
+  final String text;
 
   @override
   Widget build(BuildContext context) {

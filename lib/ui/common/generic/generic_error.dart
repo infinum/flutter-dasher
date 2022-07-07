@@ -60,7 +60,7 @@ class _RetryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onRetry,
-      child: Text('Retry'),
+      child: const Text('Retry'),
     );
   }
 }

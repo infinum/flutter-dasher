@@ -12,7 +12,7 @@ class HeaderBar extends SliverPersistentHeaderDelegate {
 
   final double expandedHeight;
   final double shrinkHeight;
-  final String? profileName;
+  final String profileName;
   final String? avatarURL;
 
   // Distance in points from maximum expanded header to minimum shrunk header
@@ -42,7 +42,7 @@ class HeaderBar extends SliverPersistentHeaderDelegate {
         Positioned(
           top: _calculateHeaderTextTopPosition(shrinkOffset),
           child: Text(
-            profileName!,
+            profileName,
             style: Look.of(context).typography.headerLabel.copyWith(color: Look.of(context).color.onHeader),
           ),
         ),

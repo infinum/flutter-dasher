@@ -12,11 +12,11 @@ class ProfileInfo extends StatelessWidget {
     required this.followers,
   }) : super(key: key);
 
-  final String? name;
-  final String? usernameTag;
+  final String name;
+  final String usernameTag;
   final String? bio;
-  final String? following;
-  final String? followers;
+  final String following;
+  final String followers;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +31,12 @@ class ProfileInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            name!,
+            name,
             style: Look.of(context).typography.h3.copyWith(color: Look.of(context).color.onBackground),
           ),
           const SizedBox(height: 4),
           Text(
-            usernameTag!,
+            usernameTag,
             style: Look.of(context).typography.tweetBody.copyWith(color: Look.of(context).color.symbolGray),
           ),
           const SizedBox(height: 15),

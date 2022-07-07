@@ -6,8 +6,8 @@ part 'user.g.dart';
 class User {
   User({
     required this.id,
-    this.name,
-    this.username,
+    required this.name,
+    required this.username,
     this.imageUrl,
     this.description,
     this.followers,
@@ -15,8 +15,8 @@ class User {
   });
 
   final String id;
-  final String? name;
-  final String? username;
+  final String name;
+  final String username;
   final String? imageUrl;
   final String? description;
   final int? followers;
