@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_text_button.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_variant_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
+import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class NewTweetScreen extends StatelessWidget {
+class NewTweetScreen extends ConsumerWidget {
   const NewTweetScreen({Key? key}) : super(key: key);
 
   static Route route() {
@@ -16,7 +19,9 @@ class NewTweetScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageUrl = ref.watch(currentUserProvider).imageUrl;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -41,13 +46,9 @@ class NewTweetScreen extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(right: 14, top: 5),
-                        child: CircleAvatar(
-                          radius: 18.0,
-                          backgroundImage: NetworkImage('https://source.unsplash.com/random/32x32?sig=1'),
-                          backgroundColor: Colors.white,
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 14, top: 5),
+                        child: _buildProfilePicture(imageUrl),
                       ),
                       Flexible(
                         child: TextFormField(
@@ -70,5 +71,20 @@ class NewTweetScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildProfilePicture(String? imageUrl) {
+    if (imageUrl != null) {
+      return CircleAvatar(
+        radius: 18.0,
+        backgroundImage: CachedNetworkImageProvider(imageUrl),
+        backgroundColor: Colors.white,
+      );
+    } else {
+      return const CircleAvatar(
+        radius: 18.0,
+        backgroundColor: Colors.grey,
+      );
+    }
   }
 }
