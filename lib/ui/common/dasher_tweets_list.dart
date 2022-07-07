@@ -10,26 +10,30 @@ class DasherTweetsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final feed = ref.watch(feedRequestProvider).feed;
+    final _provider = ref.watch(feedRequestProvider);
 
     return Center(
-      child: RefreshIndicator(
-        onRefresh: ref.read(feedRequestProvider).fetchTweetsTimeline,
-        child: ListView.builder(
-          itemCount: feed.length,
-          itemBuilder: (context, index) {
-            return DasherTweet(
-              avatarURL: feed[index].profileImageUrl,
-              username: feed[index].name,
-              usernameTag: feed[index].username,
-              tweetTime: feed[index].createdAt,
-              tweetText: feed[index].text,
-              commentsCount: feed[index].replyCount.toString(),
-              retweetsCount: feed[index].retweetCount.toString(),
-              likesCount: feed[index].likeCount.toString(),
-            );
-          },
+      child: _provider.state.maybeWhen(
+        success: (feed) => RefreshIndicator(
+          onRefresh: ref.read(feedRequestProvider).fetchTweetsTimeline,
+          child: ListView.builder(
+            itemCount: feed.length,
+            itemBuilder: (context, index) {
+              return DasherTweet(
+                avatarURL: feed[index].profileImageUrl,
+                username: feed[index].name,
+                usernameTag: feed[index].username,
+                tweetTime: feed[index].createdAt,
+                tweetText: feed[index].text,
+                commentsCount: feed[index].replyCount.toString(),
+                retweetsCount: feed[index].retweetCount.toString(),
+                likesCount: feed[index].likeCount.toString(),
+              );
+            },
+          ),
         ),
+        orElse: () => const CircularProgressIndicator(),
+        failure: (e) => Text('Error occurred $e'),
       ),
     );
   }

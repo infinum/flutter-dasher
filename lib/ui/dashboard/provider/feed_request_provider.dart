@@ -14,16 +14,8 @@ class FeedRequestProvider extends RequestProvider<List<Tweet>> {
   }
 
   final FetchFeedInteractor _feedTimelineInteractor;
-  final List<Tweet> feed = [];
 
   Future<void> fetchTweetsTimeline() {
-    return executeRequest(requestBuilder: () async {
-      var feed = await _feedTimelineInteractor.fetchFeedTimeline();
-
-      this.feed.clear();
-      this.feed.addAll(feed);
-
-      return feed;
-    });
+    return executeRequest(requestBuilder: _feedTimelineInteractor.fetchFeedTimeline);
   }
 }
