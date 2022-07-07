@@ -25,9 +25,14 @@ class FeedRepositoryImpl implements FeedRepository {
       ],
     );
 
-    return response.data.map((tweet) {
-      final UserData? user = response.includes?.users?.singleWhere((user) => user.id == tweet.authorId);
+    return _getTweetsListWithAuthors(response);
+  }
 
+  List<Tweet> _getTweetsListWithAuthors(TwitterResponse<List<TweetData>, TweetMeta> response) {
+    return response.data.map((tweet) {
+      final UserData? user = _getUserForTweet(response.includes?.users, tweet);
+
+      // Extend tweet data with user data related to that tweet
       return Tweet(
         tweet.id,
         tweet.text,
@@ -41,4 +46,7 @@ class FeedRepositoryImpl implements FeedRepository {
       );
     }).toList();
   }
+
+  //  From authorId inside the tweet find a matching user from the list of all unique users who posted those tweets
+  UserData? _getUserForTweet(List<UserData>? users, TweetData tweet) => users!.singleWhere((user) => user.id == tweet.authorId);
 }
