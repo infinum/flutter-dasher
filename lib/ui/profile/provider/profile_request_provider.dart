@@ -14,16 +14,8 @@ class ProfileRequestProvider extends RequestProvider<List<Tweet>> {
   }
 
   final ProfileTweetsInteractor _profileTweetsInteractor;
-  final List<Tweet> tweets = [];
 
   Future<void> fetchProfileTweets() {
-    return executeRequest(requestBuilder: () async {
-      var tweets = await _profileTweetsInteractor.fetchProfileTweets();
-
-      this.tweets.clear();
-      this.tweets.addAll(tweets);
-
-      return tweets;
-    });
+    return executeRequest(requestBuilder: _profileTweetsInteractor.fetchProfileTweets);
   }
 }

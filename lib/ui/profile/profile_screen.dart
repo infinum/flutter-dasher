@@ -23,7 +23,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(currentUserProvider);
-    final tweets = ref.watch(profileRequestProvider).tweets;
+    final _provider = ref.watch(profileRequestProvider);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
@@ -51,23 +51,35 @@ class ProfileScreen extends ConsumerWidget {
                   followers: user?.followers.toString(),
                 ),
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return DasherTweet(
-                      avatarURL: tweets[index].profileImageUrl,
-                      name: tweets[index].name,
-                      usernameTag: tweets[index].username,
-                      createdAt: tweets[index].createdAt,
-                      tweetText: tweets[index].text,
-                      commentsCount: tweets[index].replyCount.toString(),
-                      retweetsCount: tweets[index].retweetCount.toString(),
-                      likesCount: tweets[index].likeCount.toString(),
-                    );
-                  },
-                  childCount: tweets.length, // 1000 list items
+              _provider.state.maybeWhen(
+                orElse: () => const SliverFillRemaining(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
-              )
+                success: (tweets) => SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return DasherTweet(
+                        avatarURL: tweets[index].profileImageUrl,
+                        name: tweets[index].name,
+                        usernameTag: tweets[index].username,
+                        createdAt: tweets[index].createdAt,
+                        tweetText: tweets[index].text,
+                        commentsCount: tweets[index].replyCount.toString(),
+                        retweetsCount: tweets[index].retweetCount.toString(),
+                        likesCount: tweets[index].likeCount.toString(),
+                      );
+                    },
+                    childCount: tweets.length, // 1000 list items
+                  ),
+                ),
+                failure: (e) => SliverFillRemaining(
+                  child: Center(
+                    child: Text('Error occurred $e'),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
