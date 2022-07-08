@@ -5,6 +5,8 @@ import 'package:flutter_dasher/ui/common/buttons/primary_text_button.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_variant_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
 import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
+import 'package:flutter_dasher/ui/new_tweet/provider/new_tweet_provider.dart';
+import 'package:flutter_dasher/ui/new_tweet/provider/new_tweet_request_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NewTweetScreen extends ConsumerWidget {
@@ -20,7 +22,19 @@ class NewTweetScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _provider = ref.watch(newTweetProvider);
+    final _newTweetProvider = ref.watch(newTweetRequestProvider);
     final imageUrl = ref.watch(currentUserProvider).imageUrl;
+
+    ref.listen<NewTweetRequestProvider>(newTweetRequestProvider, (_, provider) {
+      provider.state.whenOrNull(
+        success: (_) {
+          Future.delayed(const Duration(milliseconds: 800), () {
+            Navigator.of(context).pop();
+          });
+        },
+      );
+    });
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -38,9 +52,22 @@ class NewTweetScreen extends ConsumerWidget {
                         child: const Text('Cancel'),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
-                      const PrimaryVariantButton(
-                        child: Text('Tweet'),
-                      )
+                      _newTweetProvider.state.maybeWhen(
+                        orElse: () => PrimaryVariantButton(
+                          child: const Text('Tweet'),
+                          onPressed: () => _newTweetProvider.postNewTweet(),
+                        ),
+                        success: (_) => Icon(
+                          Icons.check,
+                          size: 30,
+                          color: Look.of(context).color.primary,
+                        ),
+                        failure: (_) => Icon(
+                          Icons.error_outline,
+                          size: 30,
+                          color: Look.of(context).color.error,
+                        ),
+                      ),
                     ],
                   ),
                   Row(
@@ -60,6 +87,7 @@ class NewTweetScreen extends ConsumerWidget {
                             hintText: "What's happening?",
                             hintStyle: Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
                           ),
+                          onChanged: _provider.onNewTweetChanged,
                         ),
                       )
                     ],
