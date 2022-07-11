@@ -4,12 +4,12 @@ import 'package:flutter_dasher/ui/common/bits/request_provider/request_provider.
 import 'package:get_it/get_it.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final feedRequestProvider = ChangeNotifierProvider.autoDispose<FeedRequestProvider>(
-  (ref) => FeedRequestProvider(GetIt.instance.get()),
+final feedRequestPresenter = ChangeNotifierProvider.autoDispose<FeedRequestPresenter>(
+  (ref) => FeedRequestPresenter(GetIt.instance.get()),
 );
 
-class FeedRequestProvider extends RequestProvider<List<Tweet>> {
-  FeedRequestProvider(this._feedTimelineInteractor) {
+class FeedRequestPresenter extends RequestProvider<List<Tweet>> {
+  FeedRequestPresenter(this._feedTimelineInteractor) {
     fetchTweetsTimeline();
   }
 

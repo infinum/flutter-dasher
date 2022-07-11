@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_text_button.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_variant_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
-import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
-import 'package:flutter_dasher/ui/new_tweet/provider/new_tweet_provider.dart';
-import 'package:flutter_dasher/ui/new_tweet/provider/new_tweet_request_provider.dart';
+import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
+import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_provider.dart';
+import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_request_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NewTweetScreen extends ConsumerWidget {
@@ -22,12 +22,12 @@ class NewTweetScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _provider = ref.watch(newTweetProvider);
-    final _newTweetProvider = ref.watch(newTweetRequestProvider);
-    final imageUrl = ref.watch(currentUserProvider).imageUrl;
+    final _presenter = ref.watch(newTweetPresenter);
+    final _newTweetPresenter = ref.watch(newTweetRequestPresenter);
+    final imageUrl = ref.watch(currentUserPresenter).imageUrl;
 
-    ref.listen<NewTweetRequestProvider>(newTweetRequestProvider, (_, provider) {
-      provider.state.whenOrNull(
+    ref.listen<NewTweetRequestPresenter>(newTweetRequestPresenter, (_, presenter) {
+      presenter.state.whenOrNull(
         success: (_) {
           Future.delayed(const Duration(milliseconds: 800), () {
             Navigator.of(context).pop();
@@ -52,10 +52,10 @@ class NewTweetScreen extends ConsumerWidget {
                         child: const Text('Cancel'),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
-                      _newTweetProvider.state.maybeWhen(
+                      _newTweetPresenter.state.maybeWhen(
                         orElse: () => PrimaryVariantButton(
                           child: const Text('Tweet'),
-                          onPressed: () => _newTweetProvider.postNewTweet(),
+                          onPressed: () => _newTweetPresenter.postNewTweet(),
                         ),
                         success: (_) => Icon(
                           Icons.check,
@@ -87,7 +87,7 @@ class NewTweetScreen extends ConsumerWidget {
                             hintText: "What's happening?",
                             hintStyle: Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
                           ),
-                          onChanged: _provider.onNewTweetChanged,
+                          onChanged: _presenter.onNewTweetChanged,
                         ),
                       )
                     ],

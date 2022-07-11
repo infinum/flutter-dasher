@@ -4,12 +4,12 @@ import 'package:flutter_dasher/ui/common/bits/request_provider/request_provider.
 import 'package:get_it/get_it.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final profileRequestProvider = ChangeNotifierProvider.autoDispose<ProfileRequestProvider>(
-  (ref) => ProfileRequestProvider(GetIt.instance.get()),
+final profileRequestPresenter = ChangeNotifierProvider.autoDispose<ProfileRequestPresenter>(
+  (ref) => ProfileRequestPresenter(GetIt.instance.get()),
 );
 
-class ProfileRequestProvider extends RequestProvider<List<Tweet>> {
-  ProfileRequestProvider(this._profileTweetsInteractor) {
+class ProfileRequestPresenter extends RequestProvider<List<Tweet>> {
+  ProfileRequestPresenter(this._profileTweetsInteractor) {
     fetchProfileTweets();
   }
 

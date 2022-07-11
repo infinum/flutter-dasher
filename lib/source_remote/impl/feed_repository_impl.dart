@@ -40,7 +40,7 @@ class FeedRepositoryImpl implements FeedRepository {
       return Tweet(
         tweet.id,
         tweet.text,
-        user.profileImageUrl,
+        user.profileImageUrl?.replaceAll('normal', '400x400'),
         user.name,
         user.username,
         tweet.publicMetrics!.likeCount,
