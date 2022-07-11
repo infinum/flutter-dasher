@@ -1,10 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_text_button.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_variant_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
+import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
+import 'package:flutter_dasher/ui/new_tweet/provider/new_tweet_provider.dart';
+import 'package:flutter_dasher/ui/new_tweet/provider/new_tweet_request_provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class NewTweetScreen extends StatelessWidget {
+class NewTweetScreen extends ConsumerWidget {
   const NewTweetScreen({Key? key}) : super(key: key);
 
   static Route route() {
@@ -16,7 +21,21 @@ class NewTweetScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _provider = ref.watch(newTweetProvider);
+    final _newTweetProvider = ref.watch(newTweetRequestProvider);
+    final imageUrl = ref.watch(currentUserProvider).imageUrl;
+
+    ref.listen<NewTweetRequestProvider>(newTweetRequestProvider, (_, provider) {
+      provider.state.whenOrNull(
+        success: (_) {
+          Future.delayed(const Duration(milliseconds: 800), () {
+            Navigator.of(context).pop();
+          });
+        },
+      );
+    });
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(
@@ -33,21 +52,30 @@ class NewTweetScreen extends StatelessWidget {
                         child: const Text('Cancel'),
                         onPressed: () => Navigator.of(context).pop(),
                       ),
-                      const PrimaryVariantButton(
-                        child: Text('Tweet'),
-                      )
+                      _newTweetProvider.state.maybeWhen(
+                        orElse: () => PrimaryVariantButton(
+                          child: const Text('Tweet'),
+                          onPressed: () => _newTweetProvider.postNewTweet(),
+                        ),
+                        success: (_) => Icon(
+                          Icons.check,
+                          size: 30,
+                          color: Look.of(context).color.primary,
+                        ),
+                        failure: (_) => Icon(
+                          Icons.error_outline,
+                          size: 30,
+                          color: Look.of(context).color.error,
+                        ),
+                      ),
                     ],
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(right: 14, top: 5),
-                        child: CircleAvatar(
-                          radius: 18.0,
-                          backgroundImage: NetworkImage('https://source.unsplash.com/random/32x32?sig=1'),
-                          backgroundColor: Colors.white,
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 14, top: 5),
+                        child: _buildProfilePicture(imageUrl),
                       ),
                       Flexible(
                         child: TextFormField(
@@ -59,6 +87,7 @@ class NewTweetScreen extends StatelessWidget {
                             hintText: "What's happening?",
                             hintStyle: Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
                           ),
+                          onChanged: _provider.onNewTweetChanged,
                         ),
                       )
                     ],
@@ -70,5 +99,20 @@ class NewTweetScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildProfilePicture(String? imageUrl) {
+    if (imageUrl != null) {
+      return CircleAvatar(
+        radius: 18.0,
+        backgroundImage: CachedNetworkImageProvider(imageUrl),
+        backgroundColor: Colors.white,
+      );
+    } else {
+      return const CircleAvatar(
+        radius: 18.0,
+        backgroundColor: Colors.grey,
+      );
+    }
   }
 }
