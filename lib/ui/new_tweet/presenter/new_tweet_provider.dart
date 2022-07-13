@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dasher/common/model/new_tweet.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final newTweetProvider = ChangeNotifierProvider.autoDispose(
-  (ref) => NewTweetProvider(),
+final newTweetPresenter = ChangeNotifierProvider.autoDispose(
+  (ref) => NewTweetPresenter(),
 );
 
-class NewTweetProvider extends ChangeNotifier {
-  NewTweetProvider({String tweetText = ''}) : _tweetText = tweetText;
+class NewTweetPresenter extends ChangeNotifier {
+  NewTweetPresenter({String tweetText = ''}) : _tweetText = tweetText;
 
   String _tweetText;
   String get tweetText => _tweetText;

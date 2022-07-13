@@ -4,8 +4,8 @@ import 'package:flutter_dasher/common/model/tweet.dart';
 import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
 import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweet.dart';
-import 'package:flutter_dasher/ui/dashboard/provider/current_user_provider.dart';
-import 'package:flutter_dasher/ui/profile/provider/profile_request_provider.dart';
+import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
+import 'package:flutter_dasher/ui/profile/presenter/profile_request_presenter.dart';
 import 'package:flutter_dasher/ui/profile/widget/header_bar_component.dart';
 import 'package:flutter_dasher/ui/profile/widget/profile_info_component.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,14 +23,14 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserProvider);
-    final _provider = ref.watch(profileRequestProvider);
+    final user = ref.watch(currentUserPresenter);
+    final _presenter = ref.watch(profileRequestPresenter);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: RefreshIndicator(
-          onRefresh: ref.read(profileRequestProvider).fetchProfileTweets,
+          onRefresh: ref.read(profileRequestPresenter).fetchProfileTweets,
           child: CustomScrollView(
             scrollDirection: Axis.vertical,
             slivers: [
@@ -52,7 +52,7 @@ class ProfileScreen extends ConsumerWidget {
                   followers: user.followers.toString(),
                 ),
               ),
-              _provider.state.maybeWhen(
+              _presenter.state.maybeWhen(
                 orElse: () => const _LoadingIndicator(),
                 success: (tweets) => _TweetsList(
                   tweets: tweets,

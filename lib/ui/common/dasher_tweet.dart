@@ -130,7 +130,7 @@ class _IconText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20.0),
+      padding: const EdgeInsets.only(right: 12.0),
       child: Row(
         children: [
           icon,

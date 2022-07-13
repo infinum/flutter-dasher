@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dasher/common/model/tweet.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweet.dart';
-import 'package:flutter_dasher/ui/dashboard/provider/feed_request_provider.dart';
+import 'package:flutter_dasher/ui/dashboard/presenter/feed_request_presenter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DasherTweetsList extends ConsumerWidget {
@@ -11,10 +11,10 @@ class DasherTweetsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _provider = ref.watch(feedRequestProvider);
+    final _presenter = ref.watch(feedRequestPresenter);
 
     return Center(
-      child: _provider.state.maybeWhen(
+      child: _presenter.state.maybeWhen(
         success: (feed) => _TweetsList(
           feed: feed,
         ),
@@ -46,7 +46,7 @@ class _TweetsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
-      onRefresh: ref.read(feedRequestProvider).fetchTweetsTimeline,
+      onRefresh: ref.read(feedRequestPresenter).fetchTweetsTimeline,
       child: ListView.builder(
         itemCount: feed.length,
         itemBuilder: (context, index) {

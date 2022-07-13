@@ -3,7 +3,7 @@ import 'package:flutter_dasher/gen/assets.gen.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
 import 'package:flutter_dasher/ui/dashboard/dashboard_screen.dart';
-import 'package:flutter_dasher/ui/login/provider/login_request_provider.dart';
+import 'package:flutter_dasher/ui/login/presenter/login_request_presenter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginScreen extends HookConsumerWidget {
@@ -13,10 +13,10 @@ class LoginScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _provider = ref.watch(loginRequestProvider);
+    final _presenter = ref.watch(loginRequestPresenter);
 
-    ref.listen<LoginRequestProvider>(loginRequestProvider, (_, provider) {
-      provider.state.whenOrNull(
+    ref.listen<LoginRequestPresenter>(loginRequestPresenter, (_, presenter) {
+      presenter.state.whenOrNull(
         success: (_) => Navigator.of(context).push<void>(DashboardScreen.route()),
       );
     });
@@ -48,7 +48,7 @@ class LoginScreen extends HookConsumerWidget {
                 vertical: 22,
               ),
               child: PrimaryButton(
-                onPressed: _provider.onLoginClicked,
+                onPressed: _presenter.onLoginClicked,
                 child: const Text('Login with Twitter'),
               ),
             ),
