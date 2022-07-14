@@ -16,11 +16,11 @@ void injectDependencies(GetIt getIt) {
   );
 
   getIt.registerFactory<FeedRepository>(
-    () => FeedRepositoryImpl(getIt.get()),
+    () => FeedRepositoryImpl(getIt.get(), getIt.get()),
   );
 
   getIt.registerFactory<ProfileRepository>(
-    () => ProfileRepositoryImpl(getIt.get()),
+    () => ProfileRepositoryImpl(getIt.get(), getIt.get()),
   );
 
   getIt.registerFactory<NewTweetRepository>(
