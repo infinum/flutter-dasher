@@ -1,14 +1,14 @@
 import 'package:flutter_dasher/common/model/new_tweet.dart';
 import 'package:flutter_dasher/domain/repository/new_tweet_repository.dart';
-import 'package:twitter_api_v2/twitter_api_v2.dart';
+import 'package:flutter_dasher/source_remote/twitter/twitter_api_container.dart';
 
 class NewTweetRepositoryImpl implements NewTweetRepository {
-  NewTweetRepositoryImpl(this.twitterApi);
+  NewTweetRepositoryImpl(this.twitterApiContainer);
 
-  final TwitterApi twitterApi;
+  final TwitterApiContainer twitterApiContainer;
 
   @override
   Future<void> postNewTweet(NewTweet newTweet) async {
-    twitterApi.tweetsService.createTweet(text: newTweet.tweetText);
+    twitterApiContainer.getTwitterApi().tweetsService.createTweet(text: newTweet.tweetText);
   }
 }

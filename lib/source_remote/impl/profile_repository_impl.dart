@@ -1,18 +1,19 @@
 import 'package:flutter_dasher/common/model/tweet.dart';
 import 'package:flutter_dasher/domain/data/user_data_holder.dart';
 import 'package:flutter_dasher/domain/repository/profile_repository.dart';
+import 'package:flutter_dasher/source_remote/twitter/twitter_api_container.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
-  ProfileRepositoryImpl(this.twitterApi, this.userDataHolder);
+  ProfileRepositoryImpl(this.twitterApiContainer, this.userDataHolder);
 
-  final TwitterApi twitterApi;
+  final TwitterApiContainer twitterApiContainer;
   final UserDataHolder userDataHolder;
 
   @override
   Future<List<Tweet>> fetchProfileTweets() async {
-    final response = await twitterApi.tweetsService.lookupTweets(
+    final response = await twitterApiContainer.getTwitterApi().tweetsService.lookupTweets(
       userId: userDataHolder.user!.id,
       tweetFields: [
         TweetField.publicMetrics,
