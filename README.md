@@ -145,26 +145,24 @@ class FetchFeedInteractorImpl implements FetchFeedInteractor {
 package for fetching data from Twitter's API.
 
 ```dart
-  Future<List<Tweet>> fetchFeedTimeline() async {
-    var user = GetIt.instance.get<UserDataHolder>().user;
+Future<List<Tweet>> fetchFeedTimeline() async {
+  final response = await twitterApi.tweetsService.lookupHomeTimeline(
+    userId: userDataHolder.user!.id,
+    tweetFields: [
+      TweetField.publicMetrics,
+      TweetField.createdAt,
+    ],
+    userFields: [
+      UserField.createdAt,
+      UserField.profileImageUrl,
+    ],
+    expansions: [
+      TweetExpansion.authorId,
+    ],
+  );
 
-    final response = await twitterApi.tweetsService.lookupHomeTimeline(
-      userId: user!.id,
-      tweetFields: [
-        TweetField.publicMetrics,
-        TweetField.createdAt,
-      ],
-      userFields: [
-        UserField.createdAt,
-        UserField.profileImageUrl,
-      ],
-      expansions: [
-        TweetExpansion.authorId,
-      ],
-    );
-
-    return _getTweetsListWithAuthors(response);
-  }
+  return _getTweetsListWithAuthors(response);
+}
 ```
 
 after a successful response, data is passed back to `FeedRequestPresenter` in his state,
