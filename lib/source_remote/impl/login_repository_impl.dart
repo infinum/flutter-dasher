@@ -1,13 +1,14 @@
 import 'package:flutter_dasher/common/model/user.dart';
 import 'package:flutter_dasher/domain/repository/login_repository.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_dasher/source_remote/twitter/twitter_api_container.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart' as v2;
 import 'package:twitter_oauth2_pkce/twitter_oauth2_pkce.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
-  LoginRepositoryImpl(this.twitterOAuth2Client);
+  LoginRepositoryImpl(this.twitterOAuth2Client, this.twitterApiContainer);
 
   final TwitterOAuth2Client twitterOAuth2Client;
+  final TwitterApiContainer twitterApiContainer;
 
   @override
   Future<User> login() async {
@@ -17,7 +18,7 @@ class LoginRepositoryImpl implements LoginRepository {
 
     final twitter = v2.TwitterApi(bearerToken: response.accessToken);
 
-    GetIt.instance.registerSingleton(twitter);
+    twitterApiContainer.setTwitterApi(twitter);
 
     final userResponse = await twitter.usersService.lookupMe(
       userFields: [

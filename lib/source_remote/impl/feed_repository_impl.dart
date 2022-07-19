@@ -1,18 +1,19 @@
 import 'package:flutter_dasher/common/model/tweet.dart';
 import 'package:flutter_dasher/domain/data/user_data_holder.dart';
 import 'package:flutter_dasher/domain/repository/feed_repository.dart';
+import 'package:flutter_dasher/source_remote/twitter/twitter_api_container.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter_api_v2/twitter_api_v2.dart';
 
 class FeedRepositoryImpl implements FeedRepository {
-  FeedRepositoryImpl(this.twitterApi, this.userDataHolder);
+  FeedRepositoryImpl(this.twitterApiContainer, this.userDataHolder);
 
-  final TwitterApi twitterApi;
+  final TwitterApiContainer twitterApiContainer;
   final UserDataHolder userDataHolder;
 
   @override
   Future<List<Tweet>> fetchFeedTimeline() async {
-    final response = await twitterApi.tweetsService.lookupHomeTimeline(
+    final response = await twitterApiContainer.getTwitterApi().tweetsService.lookupHomeTimeline(
       userId: userDataHolder.user!.id,
       tweetFields: [
         TweetField.publicMetrics,
