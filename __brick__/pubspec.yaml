@@ -1,0 +1,17 @@
+name: infinum_architecture
+description: A new Flutter project with Infinum clean architecture.
+version: 1.0.0
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
