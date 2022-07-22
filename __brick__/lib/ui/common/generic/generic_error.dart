@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../common/error_handling/error_formatter.dart';
-import '../../../ui/common/look/widget/look.dart';
+{{#brick_look}}import '../../../ui/common/look/widget/look.dart';{{/brick_look}}
 
 /// Shows generic error widget, with possibility to add retry button below it
 /// if [onRetry] is not null retry will be active
@@ -31,14 +31,14 @@ class GenericError extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CircleAvatar(
-                  backgroundColor: Look.of(context).color.error.withOpacity(0.1),
+                  backgroundColor: {{#brick_look}}Look.of(context).color.error.withOpacity(0.1),{{/brick_look}}{{^brick_look}}Colors.red.withOpacity(0.1),{{/brick_look}}
                   child: Icon(
                     Icons.error_outline,
-                    color: Look.of(context).color.error,
+                    color: {{#brick_look}}Look.of(context).color.error,{{/brick_look}}{{^brick_look}}Colors.red{{/brick_look}}
                   ),
                 ),
                 const SizedBox(width: 12),
-                Text(message, textAlign: TextAlign.center, style: Look.of(context).typography.body),
+                Text(message, textAlign: TextAlign.center, {{#brick_look}}style: Look.of(context).typography.body{{/brick_look}}),
               ],
             ),
             const SizedBox(height: 16),

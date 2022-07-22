@@ -18,3 +18,13 @@ vars:
     description: Flutter version
     default: stable
     prompt: Which Flutter version you want for this project?
+  brick_look:
+    type: boolean
+    description: Install brick look
+    default: true
+    prompt: Do you want to add Look?
+  brick_request_provider:
+    type: boolean
+    description: Install brick request_provider
+    default: true
+    prompt: Do you want to add Request Provider?

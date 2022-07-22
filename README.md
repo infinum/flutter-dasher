@@ -231,6 +231,8 @@ listeners of `FeedRequestPresenter` so we can easily show/hide widgets depending
 | <img width=370 src='https://user-images.githubusercontent.com/1117315/178444942-42270ec3-40ea-4118-bfa7-a9371299cc8e.png' /> | <img width=370 src='https://user-images.githubusercontent.com/1117315/178445000-fce6a603-90d6-4166-9d1d-eaba82343784.png' /> |
 
 # Infinum architecture Mason brick
+Easiest way to set up our architecture in the project is with usage of [Mason](https://pub.dev/packages/mason_cli). 
+It will generate all the required directories and files ready to start the project.
 A brick to create clean Infinum architecture folder structure, as shown in Dasher app.
 
 ## How to use
@@ -268,10 +270,12 @@ mason make infinum_architecture --on-conflict overwrite
 
 ## Variables
 
-| Variable           | Description                                                                 | Default | Type      |
-| ------------------ | --------------------------------------------------------------------------- | ------- | --------- |
-| `project_name`     | This name is used to name main function and files `run{project_name}App()`  | example | `string`  |
-| `flutter_version`  | Defines which version of FVM you want to install                            | stable  | `string`  |
+| Variable                | Description                                                                 | Default | Type      |
+| ----------------------- | --------------------------------------------------------------------------- | ------- | --------- |
+| `project_name`          | This name is used to name main function and files `run{project_name}App()`  | example | `string`  |
+| `flutter_version`       | Defines which version of FVM you want to install                            | stable  | `string`  |
+| `brick_look`            | Optional Look                                                               | true    | `bool`    |
+| `brick_request_provider`| Optional Request Provider                                                   | true    | `bool`    |
 
 ## Outputs
 
@@ -310,27 +314,8 @@ mason make infinum_architecture --on-conflict overwrite
  ┃   ┗ 📄 inject_dependencies.dart
  ┣ 📂 ui
  ┃ ┣ 📂 common
- ┃ ┃ ┣ 📂 bits
- ┃ ┃ ┃ ┗ 📂 request_provider
- ┃ ┃ ┃   ┣ 📄 request_provider.dart
- ┃ ┃ ┃   ┣ 📄 request_state.dart
- ┃ ┃ ┃   ┗ 📄 request_state.freezed.dart
  ┃ ┃ ┣ 📂 generic
  ┃ ┃ ┃ ┗ 📄 generic_error.dart
- ┃ ┃ ┗ 📂 look
- ┃ ┃   ┣ 📂 look_data
- ┃ ┃   ┃ ┣ 📂 specific_look_data
- ┃ ┃   ┃ ┃ ┣ 📄 color_look_data.dart
- ┃ ┃   ┃ ┃ ┣ 📄 motion_look_data.dart
- ┃ ┃   ┃ ┃ ┣ 📄 shape_look_data.dart
- ┃ ┃   ┃ ┃ ┗ 📄 typography_look_data.dart
- ┃ ┃   ┃ ┗ 📄 look_data.dart
- ┃ ┃   ┣ 📂 mapping
- ┃ ┃   ┃ ┗ 📂 theme_data_mapping
- ┃ ┃   ┃   ┗ 📄 theme_data_mapper.dart
- ┃ ┃   ┗ 📂 widget
- ┃ ┃     ┣ 📄 look.dart
- ┃ ┃     ┗ 📄 look_subtree.dart
  ┃ ┗ 📂 home
  ┃   ┗ 📄 home_screen.dart
  ┣ 📄 main_production.dart
