@@ -200,3 +200,13 @@ listeners of `FeedRequestPresenter` so we can easily show/hide widgets depending
 | Profile | New Tweet |
 | ------- | --------- |
 | <img width=370 src='https://user-images.githubusercontent.com/1117315/178444942-42270ec3-40ea-4118-bfa7-a9371299cc8e.png' /> | <img width=370 src='https://user-images.githubusercontent.com/1117315/178445000-fce6a603-90d6-4166-9d1d-eaba82343784.png' /> |
+
+
+<p align="center">
+  <a href='https://infinum.com'>
+    <picture>
+        <source srcset="https://assets.infinum.com/brand/logo/static/white.svg" media="(prefers-color-scheme: dark)">
+        <img src="https://assets.infinum.com/brand/logo/static/default.svg">
+    </picture>
+  </a>
+</p>
