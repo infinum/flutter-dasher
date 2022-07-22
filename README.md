@@ -31,6 +31,7 @@
   * [Variables](#variables)
   * [Outputs](#outputs)
 
+
 # Flutter Clean Architecture Sample App - Dasher
 
 This project is a starting point for a Flutter application. Dasher App will introduce you to
@@ -321,3 +322,13 @@ mason make infinum_architecture --on-conflict overwrite
  ┣ 📄 main_production.dart
  ┗ 📄 main_staging.dart
  ```
+
+<p align="center">
+  <a href='https://infinum.com'>
+    <picture>
+        <source srcset="https://assets.infinum.com/brand/logo/static/white.svg" media="(prefers-color-scheme: dark)">
+        <img src="https://assets.infinum.com/brand/logo/static/default.svg">
+    </picture>
+  </a>
+</p>
+
