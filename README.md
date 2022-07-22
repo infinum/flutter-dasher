@@ -1,5 +1,28 @@
 # Table of contents
 
+- [Flutter Clean Architecture Sample App - Dasher](#flutter-clean-architecture-sample-app---dasher)
+- [Architecture structure](#architecture-structure)
+  * [Presentation](#presentation)
+    + [Widgets (UI)](#widgets--ui-)
+    + [Presenter](#presenter)
+  * [Domain](#domain)
+    + [Interactor](#interactor)
+    + [Data Holder](#data-holder)
+  * [Outer layer](#outer-layer)
+    + [Repository](#repository)
+    + [Source remote](#source-remote)
+    + [Source local](#source-local)
+    + [Device](#device)
+- [Folder structure](#folder-structure)
+- [Riverpod and GetIt](#riverpod-and-getit)
+- [Example of architecture flow](#example-of-architecture-flow)
+  * [Presentation](#presentation-1)
+    + [Widget](#widget)
+    + [Presenter](#presenter-1)
+  * [Domain](#domain-1)
+    + [Interactor](#interactor-1)
+    + [Repository](#repository-1)
+- [Screenshots](#screenshots)
 
 # Flutter Clean Architecture Sample App - Dasher
 
@@ -12,41 +35,40 @@ Dasher app uses the architecture structure described in [handbook](https://infin
 
 ![flutter-architecture-layers](https://user-images.githubusercontent.com/1117315/178720727-76ff7094-3f48-4127-b7ca-376f91e69682.png)
 
-## Role and description of each layer
-### Presentation
+## Presentation
 There is no business logic on this layer, it is only used to show UI and handle events. Read more
 about Presentation layer in [handbook](https://infinum.com/handbook/flutter/architecture/architecture#presenters-and-widgets).
 
-#### Widgets (UI)
+### Widgets (UI)
 - Notify presenter of events such as screen display and user touch events.
 - Observes presenter state and can rebuild on state change.
 
-#### Presenter
+### Presenter
 - Contains presentation logic, usually controlling the view state.
 
-### Domain
+## Domain
 This layer is responsible for business logic.
 
-#### Interactor
+### Interactor
 - The main job of the interactor is combining different repositories and handling business logic.
 
-#### Data Holder
+### Data Holder
 - Singleton class that holds data in memory, that doesn't call repositories or other outer layers.
 
-### Outer layer
-#### Repository
+## Outer layer
+### Repository
 - It uses concrete implementations like dio, hive, add2calendar, other plugins and abstracts them
   from the rest of the application.
 - Repository should be behind and interface.
 - Interface belongs to the domain and the implementation belongs to the outer layers.
 
-#### Source remote
+### Source remote
 - Represents communication with remote sources (web, http clients, sockets).
 
-#### Source local
+### Source local
 - Represents communication with local sources (database, shared_prefs).
 
-#### Device
+### Device
 - Represents communication with device hardware (e.g. sensors) or software
   (calendar, permissions).
 
