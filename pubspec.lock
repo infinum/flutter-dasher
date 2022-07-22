@@ -383,11 +383,13 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_web_auth:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: flutter_web_auth
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: a49488592f9eeeec3c75ae9335ed51ae84f2a2b0
+      resolved-ref: a49488592f9eeeec3c75ae9335ed51ae84f2a2b0
+      url: "https://github.com/noga-dev/flutter_web_auth"
+    source: git
     version: "0.4.1"
   flutter_web_plugins:
     dependency: transitive
@@ -864,9 +866,11 @@ packages:
   twitter_oauth2_pkce:
     dependency: "direct main"
     description:
-      name: twitter_oauth2_pkce
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: "65411f5ab24a9bbdf5b8904fa93f87c83cce30cb"
+      resolved-ref: "65411f5ab24a9bbdf5b8904fa93f87c83cce30cb"
+      url: "https://github.com/twitter-dart/twitter-oauth2-pkce.git"
+    source: git
     version: "0.3.0"
   typed_data:
     dependency: transitive

@@ -23,6 +23,14 @@
     + [Interactor](#interactor-1)
     + [Repository](#repository-1)
 - [Screenshots](#screenshots)
+- [Infinum architecture Mason brick](#infinum-architecture-mason-brick)
+  * [How to use](#how-to-use)
+    + [Tools to install](#tools-to-install)
+    + [Create new project](#create-new-project)
+    + [Mason brick setup](#mason-brick-setup)
+  * [Variables](#variables)
+  * [Outputs](#outputs)
+
 
 # Flutter Clean Architecture Sample App - Dasher
 
@@ -223,6 +231,97 @@ listeners of `FeedRequestPresenter` so we can easily show/hide widgets depending
 | ------- | --------- |
 | <img width=370 src='https://user-images.githubusercontent.com/1117315/178444942-42270ec3-40ea-4118-bfa7-a9371299cc8e.png' /> | <img width=370 src='https://user-images.githubusercontent.com/1117315/178445000-fce6a603-90d6-4166-9d1d-eaba82343784.png' /> |
 
+# Infinum architecture Mason brick
+Easiest way to set up our architecture in the project is with usage of [Mason](https://pub.dev/packages/mason_cli). 
+It will generate all the required directories and files ready to start the project.
+A brick to create clean Infinum architecture folder structure, as shown in Dasher app.
+
+## How to use
+### Tools to install
+Make sure you have installed [FVM - Flutter Version Management](https://fvm.app/docs/getting_started/installation).
+```
+dart pub global activate fvm
+```
+Also install [Mason CLI](https://pub.dev/packages/mason_cli) it's must have for using Mason bricks.
+```
+dart pub global activate mason_cli
+```
+### Create new project
+Create new Flutter project:
+```
+flutter create {project_name}
+```
+move to project folder:
+```
+cd {project_name}
+```
+### Mason brick setup
+Initialize mason:
+```
+mason init
+```
+Add mason brick to your project:
+```
+mason add infinum_architecture
+```
+Start generating Infinum architecture folder structure:
+```
+mason make infinum_architecture --on-conflict overwrite
+```
+
+## Variables
+
+| Variable                | Description                                                                 | Default | Type      |
+| ----------------------- | --------------------------------------------------------------------------- | ------- | --------- |
+| `project_name`          | This name is used to name main function and files `run{project_name}App()`  | example | `string`  |
+| `flutter_version`       | Defines which version of FVM you want to install                            | stable  | `string`  |
+| `brick_look`            | Optional Look                                                               | true    | `bool`    |
+| `brick_request_provider`| Optional Request Provider                                                   | true    | `bool`    |
+
+## Outputs
+
+```
+📦 lib
+ ┣ 📂 app
+ ┃ ┣ 📂 di
+ ┃ ┃ ┗ 📄 inject_dependencies.dart
+ ┃ ┣ 📄 example_app.dart
+ ┃ ┗ 📄 run_example_app.dart
+ ┣ 📂 common
+ ┃ ┣ 📂 error_handling
+ ┃ ┃ ┣ 📂 base
+ ┃ ┃ ┃ ┣ 📄 expected_exception.dart
+ ┃ ┃ ┃ ┗ 📄 localized_exception.dart
+ ┃ ┃ ┗ 📄 error_formatter.dart
+ ┃ ┣ 📂 flavor
+ ┃ ┃ ┣ 📄 app_build_mode.dart
+ ┃ ┃ ┣ 📄 flavor.dart
+ ┃ ┃ ┣ 📄 flavor_config.dart
+ ┃ ┃ ┗ 📄 flavor_values.dart
+ ┃ ┗ 📂 logger
+ ┃   ┣ 📄 custom_loggers.dart
+ ┃   ┗ 📄 firebase_log_printer.dart
+ ┣ 📂 device
+ ┃ ┗ 📂 di
+ ┃   ┗ 📄 inject_dependencies.dart
+ ┣ 📂 domain
+ ┃ ┗ 📂 di
+ ┃   ┗ 📄 inject_dependencies.dart
+ ┣ 📂 source_local
+ ┃ ┗ 📂 di
+ ┃   ┗ 📄 inject_dependencies.dart
+ ┣ 📂 source_remote
+ ┃ ┗ 📂 di
+ ┃   ┗ 📄 inject_dependencies.dart
+ ┣ 📂 ui
+ ┃ ┣ 📂 common
+ ┃ ┃ ┣ 📂 generic
+ ┃ ┃ ┃ ┗ 📄 generic_error.dart
+ ┃ ┗ 📂 home
+ ┃   ┗ 📄 home_screen.dart
+ ┣ 📄 main_production.dart
+ ┗ 📄 main_staging.dart
+ ```
 
 <p align="center">
   <a href='https://infinum.com'>
@@ -232,3 +331,4 @@ listeners of `FeedRequestPresenter` so we can easily show/hide widgets depending
     </picture>
   </a>
 </p>
+
