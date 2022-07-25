@@ -45,5 +45,5 @@ app.*.map.json
 /android/app/release
 
 # FVM related
-.fvm/
+.fvm/*
 !.fvm/fvm_config.json

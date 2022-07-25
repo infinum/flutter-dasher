@@ -866,11 +866,9 @@ packages:
   twitter_oauth2_pkce:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "65411f5ab24a9bbdf5b8904fa93f87c83cce30cb"
-      resolved-ref: "65411f5ab24a9bbdf5b8904fa93f87c83cce30cb"
-      url: "https://github.com/twitter-dart/twitter-oauth2-pkce.git"
-    source: git
+      name: twitter_oauth2_pkce
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.3.0"
   typed_data:
     dependency: transitive
