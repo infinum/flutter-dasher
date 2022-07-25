@@ -7,6 +7,8 @@ version: 1.0.0
 environment:
   mason: ">=0.1.0-dev.26 <0.1.0"
 
+repository: https://github.com/infinum/flutter-dasher
+
 vars:
   project_name:
     type: string
