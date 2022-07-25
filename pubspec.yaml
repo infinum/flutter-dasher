@@ -36,10 +36,6 @@ dependency_overrides:
     git:
       url: https://github.com/noga-dev/flutter_web_auth
       ref: a49488592f9eeeec3c75ae9335ed51ae84f2a2b0
-  twitter_oauth2_pkce:
-    git:
-      url: https://github.com/twitter-dart/twitter-oauth2-pkce.git
-      ref: 65411f5ab24a9bbdf5b8904fa93f87c83cce30cb
 
 dev_dependencies:
   flutter_test:
