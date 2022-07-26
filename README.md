@@ -232,9 +232,7 @@ listeners of `FeedRequestPresenter` so we can easily show/hide widgets depending
 | <img width=370 src='https://user-images.githubusercontent.com/1117315/178444942-42270ec3-40ea-4118-bfa7-a9371299cc8e.png' /> | <img width=370 src='https://user-images.githubusercontent.com/1117315/178445000-fce6a603-90d6-4166-9d1d-eaba82343784.png' /> |
 
 # Infinum architecture Mason brick
-Easiest way to set up our architecture in the project is with usage of [Mason](https://pub.dev/packages/mason_cli). 
-It will generate all the required directories and files ready to start the project.
-A brick to create clean Infinum architecture folder structure, as shown in Dasher app.
+Easiest way to set up our architecture in the project is with usage of [Mason](https://pub.dev/packages/mason_cli) bricks. The infinum_architecture brick is published on https://brickhub.dev/bricks/infinum_architecture/  and it will generate all the required directories and files ready to start the project.
 
 ## How to use
 ### Tools to install
