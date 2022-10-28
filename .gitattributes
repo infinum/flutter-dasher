@@ -1,0 +1,4 @@
+*.freezed.dart -diff -gitlab-diff linguist-generated
+*.g.dart -diff -gitlab-diff linguist-generated
+*.gen.dart -diff -gitlab-diff linguist-generated
+*.mocks.dart -diff -gitlab-diff linguist-generated
