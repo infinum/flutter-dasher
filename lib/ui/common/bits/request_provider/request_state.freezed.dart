@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'request_state.dart';
 
@@ -26,10 +26,10 @@ mixin _$RequestState<Value, Error extends Exception> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Value? resultMaybe)? loading,
-    TResult Function(Value result)? success,
-    TResult Function(Error error)? failure,
+    TResult? Function()? initial,
+    TResult? Function(Value? resultMaybe)? loading,
+    TResult? Function(Value result)? success,
+    TResult? Function(Error error)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$RequestState<Value, Error extends Exception> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RequestStateInitial<Value, Error> value)? initial,
-    TResult Function(RequestStateLoading<Value, Error> value)? loading,
-    TResult Function(RequestStateSuccess<Value, Error> value)? success,
-    TResult Function(RequestStateFailure<Value, Error> value)? failure,
+    TResult? Function(RequestStateInitial<Value, Error> value)? initial,
+    TResult? Function(RequestStateLoading<Value, Error> value)? loading,
+    TResult? Function(RequestStateSuccess<Value, Error> value)? success,
+    TResult? Function(RequestStateFailure<Value, Error> value)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,47 +72,48 @@ mixin _$RequestState<Value, Error extends Exception> {
 abstract class $RequestStateCopyWith<Value, Error extends Exception, $Res> {
   factory $RequestStateCopyWith(RequestState<Value, Error> value,
           $Res Function(RequestState<Value, Error>) then) =
-      _$RequestStateCopyWithImpl<Value, Error, $Res>;
+      _$RequestStateCopyWithImpl<Value, Error, $Res,
+          RequestState<Value, Error>>;
 }
 
 /// @nodoc
-class _$RequestStateCopyWithImpl<Value, Error extends Exception, $Res>
+class _$RequestStateCopyWithImpl<Value, Error extends Exception, $Res,
+        $Val extends RequestState<Value, Error>>
     implements $RequestStateCopyWith<Value, Error, $Res> {
   _$RequestStateCopyWithImpl(this._value, this._then);
 
-  final RequestState<Value, Error> _value;
   // ignore: unused_field
-  final $Res Function(RequestState<Value, Error>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
-abstract class _$$RequestStateInitialCopyWith<Value, Error extends Exception,
-    $Res> {
-  factory _$$RequestStateInitialCopyWith(
-          _$RequestStateInitial<Value, Error> value,
-          $Res Function(_$RequestStateInitial<Value, Error>) then) =
-      __$$RequestStateInitialCopyWithImpl<Value, Error, $Res>;
+abstract class _$$RequestStateInitialImplCopyWith<Value,
+    Error extends Exception, $Res> {
+  factory _$$RequestStateInitialImplCopyWith(
+          _$RequestStateInitialImpl<Value, Error> value,
+          $Res Function(_$RequestStateInitialImpl<Value, Error>) then) =
+      __$$RequestStateInitialImplCopyWithImpl<Value, Error, $Res>;
 }
 
 /// @nodoc
-class __$$RequestStateInitialCopyWithImpl<Value, Error extends Exception, $Res>
-    extends _$RequestStateCopyWithImpl<Value, Error, $Res>
-    implements _$$RequestStateInitialCopyWith<Value, Error, $Res> {
-  __$$RequestStateInitialCopyWithImpl(
-      _$RequestStateInitial<Value, Error> _value,
-      $Res Function(_$RequestStateInitial<Value, Error>) _then)
-      : super(_value, (v) => _then(v as _$RequestStateInitial<Value, Error>));
-
-  @override
-  _$RequestStateInitial<Value, Error> get _value =>
-      super._value as _$RequestStateInitial<Value, Error>;
+class __$$RequestStateInitialImplCopyWithImpl<Value, Error extends Exception,
+        $Res>
+    extends _$RequestStateCopyWithImpl<Value, Error, $Res,
+        _$RequestStateInitialImpl<Value, Error>>
+    implements _$$RequestStateInitialImplCopyWith<Value, Error, $Res> {
+  __$$RequestStateInitialImplCopyWithImpl(
+      _$RequestStateInitialImpl<Value, Error> _value,
+      $Res Function(_$RequestStateInitialImpl<Value, Error>) _then)
+      : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RequestStateInitial<Value, Error extends Exception>
+class _$RequestStateInitialImpl<Value, Error extends Exception>
     implements RequestStateInitial<Value, Error> {
-  const _$RequestStateInitial();
+  const _$RequestStateInitialImpl();
 
   @override
   String toString() {
@@ -120,10 +121,10 @@ class _$RequestStateInitial<Value, Error extends Exception>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestStateInitial<Value, Error>);
+            other is _$RequestStateInitialImpl<Value, Error>);
   }
 
   @override
@@ -143,10 +144,10 @@ class _$RequestStateInitial<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Value? resultMaybe)? loading,
-    TResult Function(Value result)? success,
-    TResult Function(Error error)? failure,
+    TResult? Function()? initial,
+    TResult? Function(Value? resultMaybe)? loading,
+    TResult? Function(Value result)? success,
+    TResult? Function(Error error)? failure,
   }) {
     return initial?.call();
   }
@@ -180,10 +181,10 @@ class _$RequestStateInitial<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RequestStateInitial<Value, Error> value)? initial,
-    TResult Function(RequestStateLoading<Value, Error> value)? loading,
-    TResult Function(RequestStateSuccess<Value, Error> value)? success,
-    TResult Function(RequestStateFailure<Value, Error> value)? failure,
+    TResult? Function(RequestStateInitial<Value, Error> value)? initial,
+    TResult? Function(RequestStateLoading<Value, Error> value)? loading,
+    TResult? Function(RequestStateSuccess<Value, Error> value)? success,
+    TResult? Function(RequestStateFailure<Value, Error> value)? failure,
   }) {
     return initial?.call(this);
   }
@@ -206,38 +207,38 @@ class _$RequestStateInitial<Value, Error extends Exception>
 
 abstract class RequestStateInitial<Value, Error extends Exception>
     implements RequestState<Value, Error> {
-  const factory RequestStateInitial() = _$RequestStateInitial<Value, Error>;
+  const factory RequestStateInitial() = _$RequestStateInitialImpl<Value, Error>;
 }
 
 /// @nodoc
-abstract class _$$RequestStateLoadingCopyWith<Value, Error extends Exception,
-    $Res> {
-  factory _$$RequestStateLoadingCopyWith(
-          _$RequestStateLoading<Value, Error> value,
-          $Res Function(_$RequestStateLoading<Value, Error>) then) =
-      __$$RequestStateLoadingCopyWithImpl<Value, Error, $Res>;
+abstract class _$$RequestStateLoadingImplCopyWith<Value,
+    Error extends Exception, $Res> {
+  factory _$$RequestStateLoadingImplCopyWith(
+          _$RequestStateLoadingImpl<Value, Error> value,
+          $Res Function(_$RequestStateLoadingImpl<Value, Error>) then) =
+      __$$RequestStateLoadingImplCopyWithImpl<Value, Error, $Res>;
+  @useResult
   $Res call({Value? resultMaybe});
 }
 
 /// @nodoc
-class __$$RequestStateLoadingCopyWithImpl<Value, Error extends Exception, $Res>
-    extends _$RequestStateCopyWithImpl<Value, Error, $Res>
-    implements _$$RequestStateLoadingCopyWith<Value, Error, $Res> {
-  __$$RequestStateLoadingCopyWithImpl(
-      _$RequestStateLoading<Value, Error> _value,
-      $Res Function(_$RequestStateLoading<Value, Error>) _then)
-      : super(_value, (v) => _then(v as _$RequestStateLoading<Value, Error>));
+class __$$RequestStateLoadingImplCopyWithImpl<Value, Error extends Exception,
+        $Res>
+    extends _$RequestStateCopyWithImpl<Value, Error, $Res,
+        _$RequestStateLoadingImpl<Value, Error>>
+    implements _$$RequestStateLoadingImplCopyWith<Value, Error, $Res> {
+  __$$RequestStateLoadingImplCopyWithImpl(
+      _$RequestStateLoadingImpl<Value, Error> _value,
+      $Res Function(_$RequestStateLoadingImpl<Value, Error>) _then)
+      : super(_value, _then);
 
-  @override
-  _$RequestStateLoading<Value, Error> get _value =>
-      super._value as _$RequestStateLoading<Value, Error>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? resultMaybe = freezed,
   }) {
-    return _then(_$RequestStateLoading<Value, Error>(
-      resultMaybe: resultMaybe == freezed
+    return _then(_$RequestStateLoadingImpl<Value, Error>(
+      resultMaybe: freezed == resultMaybe
           ? _value.resultMaybe
           : resultMaybe // ignore: cast_nullable_to_non_nullable
               as Value?,
@@ -247,9 +248,9 @@ class __$$RequestStateLoadingCopyWithImpl<Value, Error extends Exception, $Res>
 
 /// @nodoc
 
-class _$RequestStateLoading<Value, Error extends Exception>
+class _$RequestStateLoadingImpl<Value, Error extends Exception>
     implements RequestStateLoading<Value, Error> {
-  const _$RequestStateLoading({this.resultMaybe});
+  const _$RequestStateLoadingImpl({this.resultMaybe});
 
   @override
   final Value? resultMaybe;
@@ -260,10 +261,10 @@ class _$RequestStateLoading<Value, Error extends Exception>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestStateLoading<Value, Error> &&
+            other is _$RequestStateLoadingImpl<Value, Error> &&
             const DeepCollectionEquality()
                 .equals(other.resultMaybe, resultMaybe));
   }
@@ -274,10 +275,11 @@ class _$RequestStateLoading<Value, Error extends Exception>
 
   @JsonKey(ignore: true)
   @override
-  _$$RequestStateLoadingCopyWith<Value, Error,
-          _$RequestStateLoading<Value, Error>>
-      get copyWith => __$$RequestStateLoadingCopyWithImpl<Value, Error,
-          _$RequestStateLoading<Value, Error>>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$RequestStateLoadingImplCopyWith<Value, Error,
+          _$RequestStateLoadingImpl<Value, Error>>
+      get copyWith => __$$RequestStateLoadingImplCopyWithImpl<Value, Error,
+          _$RequestStateLoadingImpl<Value, Error>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -293,10 +295,10 @@ class _$RequestStateLoading<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Value? resultMaybe)? loading,
-    TResult Function(Value result)? success,
-    TResult Function(Error error)? failure,
+    TResult? Function()? initial,
+    TResult? Function(Value? resultMaybe)? loading,
+    TResult? Function(Value result)? success,
+    TResult? Function(Error error)? failure,
   }) {
     return loading?.call(resultMaybe);
   }
@@ -330,10 +332,10 @@ class _$RequestStateLoading<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RequestStateInitial<Value, Error> value)? initial,
-    TResult Function(RequestStateLoading<Value, Error> value)? loading,
-    TResult Function(RequestStateSuccess<Value, Error> value)? success,
-    TResult Function(RequestStateFailure<Value, Error> value)? failure,
+    TResult? Function(RequestStateInitial<Value, Error> value)? initial,
+    TResult? Function(RequestStateLoading<Value, Error> value)? loading,
+    TResult? Function(RequestStateSuccess<Value, Error> value)? success,
+    TResult? Function(RequestStateFailure<Value, Error> value)? failure,
   }) {
     return loading?.call(this);
   }
@@ -357,44 +359,44 @@ class _$RequestStateLoading<Value, Error extends Exception>
 abstract class RequestStateLoading<Value, Error extends Exception>
     implements RequestState<Value, Error> {
   const factory RequestStateLoading({final Value? resultMaybe}) =
-      _$RequestStateLoading<Value, Error>;
+      _$RequestStateLoadingImpl<Value, Error>;
 
-  Value? get resultMaybe => throw _privateConstructorUsedError;
+  Value? get resultMaybe;
   @JsonKey(ignore: true)
-  _$$RequestStateLoadingCopyWith<Value, Error,
-          _$RequestStateLoading<Value, Error>>
+  _$$RequestStateLoadingImplCopyWith<Value, Error,
+          _$RequestStateLoadingImpl<Value, Error>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RequestStateSuccessCopyWith<Value, Error extends Exception,
-    $Res> {
-  factory _$$RequestStateSuccessCopyWith(
-          _$RequestStateSuccess<Value, Error> value,
-          $Res Function(_$RequestStateSuccess<Value, Error>) then) =
-      __$$RequestStateSuccessCopyWithImpl<Value, Error, $Res>;
+abstract class _$$RequestStateSuccessImplCopyWith<Value,
+    Error extends Exception, $Res> {
+  factory _$$RequestStateSuccessImplCopyWith(
+          _$RequestStateSuccessImpl<Value, Error> value,
+          $Res Function(_$RequestStateSuccessImpl<Value, Error>) then) =
+      __$$RequestStateSuccessImplCopyWithImpl<Value, Error, $Res>;
+  @useResult
   $Res call({Value result});
 }
 
 /// @nodoc
-class __$$RequestStateSuccessCopyWithImpl<Value, Error extends Exception, $Res>
-    extends _$RequestStateCopyWithImpl<Value, Error, $Res>
-    implements _$$RequestStateSuccessCopyWith<Value, Error, $Res> {
-  __$$RequestStateSuccessCopyWithImpl(
-      _$RequestStateSuccess<Value, Error> _value,
-      $Res Function(_$RequestStateSuccess<Value, Error>) _then)
-      : super(_value, (v) => _then(v as _$RequestStateSuccess<Value, Error>));
+class __$$RequestStateSuccessImplCopyWithImpl<Value, Error extends Exception,
+        $Res>
+    extends _$RequestStateCopyWithImpl<Value, Error, $Res,
+        _$RequestStateSuccessImpl<Value, Error>>
+    implements _$$RequestStateSuccessImplCopyWith<Value, Error, $Res> {
+  __$$RequestStateSuccessImplCopyWithImpl(
+      _$RequestStateSuccessImpl<Value, Error> _value,
+      $Res Function(_$RequestStateSuccessImpl<Value, Error>) _then)
+      : super(_value, _then);
 
-  @override
-  _$RequestStateSuccess<Value, Error> get _value =>
-      super._value as _$RequestStateSuccess<Value, Error>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? result = freezed,
   }) {
-    return _then(_$RequestStateSuccess<Value, Error>(
-      result == freezed
+    return _then(_$RequestStateSuccessImpl<Value, Error>(
+      freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
               as Value,
@@ -404,9 +406,9 @@ class __$$RequestStateSuccessCopyWithImpl<Value, Error extends Exception, $Res>
 
 /// @nodoc
 
-class _$RequestStateSuccess<Value, Error extends Exception>
+class _$RequestStateSuccessImpl<Value, Error extends Exception>
     implements RequestStateSuccess<Value, Error> {
-  const _$RequestStateSuccess(this.result);
+  const _$RequestStateSuccessImpl(this.result);
 
   @override
   final Value result;
@@ -417,10 +419,10 @@ class _$RequestStateSuccess<Value, Error extends Exception>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestStateSuccess<Value, Error> &&
+            other is _$RequestStateSuccessImpl<Value, Error> &&
             const DeepCollectionEquality().equals(other.result, result));
   }
 
@@ -430,10 +432,11 @@ class _$RequestStateSuccess<Value, Error extends Exception>
 
   @JsonKey(ignore: true)
   @override
-  _$$RequestStateSuccessCopyWith<Value, Error,
-          _$RequestStateSuccess<Value, Error>>
-      get copyWith => __$$RequestStateSuccessCopyWithImpl<Value, Error,
-          _$RequestStateSuccess<Value, Error>>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$RequestStateSuccessImplCopyWith<Value, Error,
+          _$RequestStateSuccessImpl<Value, Error>>
+      get copyWith => __$$RequestStateSuccessImplCopyWithImpl<Value, Error,
+          _$RequestStateSuccessImpl<Value, Error>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -449,10 +452,10 @@ class _$RequestStateSuccess<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Value? resultMaybe)? loading,
-    TResult Function(Value result)? success,
-    TResult Function(Error error)? failure,
+    TResult? Function()? initial,
+    TResult? Function(Value? resultMaybe)? loading,
+    TResult? Function(Value result)? success,
+    TResult? Function(Error error)? failure,
   }) {
     return success?.call(result);
   }
@@ -486,10 +489,10 @@ class _$RequestStateSuccess<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RequestStateInitial<Value, Error> value)? initial,
-    TResult Function(RequestStateLoading<Value, Error> value)? loading,
-    TResult Function(RequestStateSuccess<Value, Error> value)? success,
-    TResult Function(RequestStateFailure<Value, Error> value)? failure,
+    TResult? Function(RequestStateInitial<Value, Error> value)? initial,
+    TResult? Function(RequestStateLoading<Value, Error> value)? loading,
+    TResult? Function(RequestStateSuccess<Value, Error> value)? success,
+    TResult? Function(RequestStateFailure<Value, Error> value)? failure,
   }) {
     return success?.call(this);
   }
@@ -513,44 +516,44 @@ class _$RequestStateSuccess<Value, Error extends Exception>
 abstract class RequestStateSuccess<Value, Error extends Exception>
     implements RequestState<Value, Error> {
   const factory RequestStateSuccess(final Value result) =
-      _$RequestStateSuccess<Value, Error>;
+      _$RequestStateSuccessImpl<Value, Error>;
 
-  Value get result => throw _privateConstructorUsedError;
+  Value get result;
   @JsonKey(ignore: true)
-  _$$RequestStateSuccessCopyWith<Value, Error,
-          _$RequestStateSuccess<Value, Error>>
+  _$$RequestStateSuccessImplCopyWith<Value, Error,
+          _$RequestStateSuccessImpl<Value, Error>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RequestStateFailureCopyWith<Value, Error extends Exception,
-    $Res> {
-  factory _$$RequestStateFailureCopyWith(
-          _$RequestStateFailure<Value, Error> value,
-          $Res Function(_$RequestStateFailure<Value, Error>) then) =
-      __$$RequestStateFailureCopyWithImpl<Value, Error, $Res>;
+abstract class _$$RequestStateFailureImplCopyWith<Value,
+    Error extends Exception, $Res> {
+  factory _$$RequestStateFailureImplCopyWith(
+          _$RequestStateFailureImpl<Value, Error> value,
+          $Res Function(_$RequestStateFailureImpl<Value, Error>) then) =
+      __$$RequestStateFailureImplCopyWithImpl<Value, Error, $Res>;
+  @useResult
   $Res call({Error error});
 }
 
 /// @nodoc
-class __$$RequestStateFailureCopyWithImpl<Value, Error extends Exception, $Res>
-    extends _$RequestStateCopyWithImpl<Value, Error, $Res>
-    implements _$$RequestStateFailureCopyWith<Value, Error, $Res> {
-  __$$RequestStateFailureCopyWithImpl(
-      _$RequestStateFailure<Value, Error> _value,
-      $Res Function(_$RequestStateFailure<Value, Error>) _then)
-      : super(_value, (v) => _then(v as _$RequestStateFailure<Value, Error>));
+class __$$RequestStateFailureImplCopyWithImpl<Value, Error extends Exception,
+        $Res>
+    extends _$RequestStateCopyWithImpl<Value, Error, $Res,
+        _$RequestStateFailureImpl<Value, Error>>
+    implements _$$RequestStateFailureImplCopyWith<Value, Error, $Res> {
+  __$$RequestStateFailureImplCopyWithImpl(
+      _$RequestStateFailureImpl<Value, Error> _value,
+      $Res Function(_$RequestStateFailureImpl<Value, Error>) _then)
+      : super(_value, _then);
 
-  @override
-  _$RequestStateFailure<Value, Error> get _value =>
-      super._value as _$RequestStateFailure<Value, Error>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
-    return _then(_$RequestStateFailure<Value, Error>(
-      error == freezed
+    return _then(_$RequestStateFailureImpl<Value, Error>(
+      null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Error,
@@ -560,9 +563,9 @@ class __$$RequestStateFailureCopyWithImpl<Value, Error extends Exception, $Res>
 
 /// @nodoc
 
-class _$RequestStateFailure<Value, Error extends Exception>
+class _$RequestStateFailureImpl<Value, Error extends Exception>
     implements RequestStateFailure<Value, Error> {
-  const _$RequestStateFailure(this.error);
+  const _$RequestStateFailureImpl(this.error);
 
   @override
   final Error error;
@@ -573,10 +576,10 @@ class _$RequestStateFailure<Value, Error extends Exception>
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RequestStateFailure<Value, Error> &&
+            other is _$RequestStateFailureImpl<Value, Error> &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -586,10 +589,11 @@ class _$RequestStateFailure<Value, Error extends Exception>
 
   @JsonKey(ignore: true)
   @override
-  _$$RequestStateFailureCopyWith<Value, Error,
-          _$RequestStateFailure<Value, Error>>
-      get copyWith => __$$RequestStateFailureCopyWithImpl<Value, Error,
-          _$RequestStateFailure<Value, Error>>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$RequestStateFailureImplCopyWith<Value, Error,
+          _$RequestStateFailureImpl<Value, Error>>
+      get copyWith => __$$RequestStateFailureImplCopyWithImpl<Value, Error,
+          _$RequestStateFailureImpl<Value, Error>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -605,10 +609,10 @@ class _$RequestStateFailure<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Value? resultMaybe)? loading,
-    TResult Function(Value result)? success,
-    TResult Function(Error error)? failure,
+    TResult? Function()? initial,
+    TResult? Function(Value? resultMaybe)? loading,
+    TResult? Function(Value result)? success,
+    TResult? Function(Error error)? failure,
   }) {
     return failure?.call(error);
   }
@@ -642,10 +646,10 @@ class _$RequestStateFailure<Value, Error extends Exception>
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(RequestStateInitial<Value, Error> value)? initial,
-    TResult Function(RequestStateLoading<Value, Error> value)? loading,
-    TResult Function(RequestStateSuccess<Value, Error> value)? success,
-    TResult Function(RequestStateFailure<Value, Error> value)? failure,
+    TResult? Function(RequestStateInitial<Value, Error> value)? initial,
+    TResult? Function(RequestStateLoading<Value, Error> value)? loading,
+    TResult? Function(RequestStateSuccess<Value, Error> value)? success,
+    TResult? Function(RequestStateFailure<Value, Error> value)? failure,
   }) {
     return failure?.call(this);
   }
@@ -669,11 +673,11 @@ class _$RequestStateFailure<Value, Error extends Exception>
 abstract class RequestStateFailure<Value, Error extends Exception>
     implements RequestState<Value, Error> {
   const factory RequestStateFailure(final Error error) =
-      _$RequestStateFailure<Value, Error>;
+      _$RequestStateFailureImpl<Value, Error>;
 
-  Error get error => throw _privateConstructorUsedError;
+  Error get error;
   @JsonKey(ignore: true)
-  _$$RequestStateFailureCopyWith<Value, Error,
-          _$RequestStateFailure<Value, Error>>
+  _$$RequestStateFailureImplCopyWith<Value, Error,
+          _$RequestStateFailureImpl<Value, Error>>
       get copyWith => throw _privateConstructorUsedError;
 }
