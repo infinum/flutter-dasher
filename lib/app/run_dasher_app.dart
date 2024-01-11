@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dasher/ui/login/login_screen.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,6 +16,9 @@ import 'dasher_app.dart';
 // ignore_for_file: prefer-match-file-name
 Future<void> runDasherApp() async {
   await runZonedGuarded<Future<void>>(() async {
+    final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
     // injection
     _injectAppBuildMode();
     app.injectDependencies();
@@ -30,6 +34,7 @@ Future<void> runDasherApp() async {
         child: DasherApp(const LoginScreen()),
       ),
     );
+    FlutterNativeSplash.remove();
   }, (dynamic error, StackTrace stackTrace) async {
     await FlavorConfig.submitError(
       error,
