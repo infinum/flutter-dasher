@@ -11,39 +11,34 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   flutter_hooks: ^0.18.4
-  flutter_inappwebview: ^5.4.3+7
-  flutter_svg: ^1.1.0
+  flutter_inappwebview: ^6.0.0
+  flutter_svg: ^2.0.9
   get_it: ^7.2.0
   riverpod: ^1.0.3
-  dio: ^4.0.6
-  flutter_secure_storage: ^5.0.2
-  json_serializable: ^6.2.0
+  dio: ^5.4.0
+  flutter_secure_storage: ^9.0.0
   japx: ^2.0.4
   loggy: ^2.0.1+1
   hooks_riverpod: ^1.0.4
-  flutter_launcher_icons: ^0.9.3
-  flutter_native_splash: ^2.2.3+1
-  flutter_gen_runner: ^4.3.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.9
+  flutter_gen_runner: ^5.4.0
   flutter_loggy: ^2.0.1
   freezed_annotation: ^2.0.3
-  cached_network_image: ^3.2.1
-  twitter_oauth2_pkce: ^0.3.0
-  twitter_api_v2: ^2.8.1
-  intl: ^0.17.0
-
-dependency_overrides:
-  flutter_web_auth:
-    git:
-      url: https://github.com/noga-dev/flutter_web_auth
-      ref: a49488592f9eeeec3c75ae9335ed51ae84f2a2b0
+  cached_network_image: ^3.3.1
+  twitter_oauth2_pkce: ^1.0.2
+  twitter_api_v2: ^4.9.4
+  intl: ^0.19.0
+  json_annotation: ^4.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  flutter_gen: ^4.3.0
+  flutter_lints: ^3.0.1
+  flutter_gen: ^5.4.0
   build_runner: ^2.1.11
-  freezed: ^2.0.3+1
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
 
 flutter_gen:
   integrations:
