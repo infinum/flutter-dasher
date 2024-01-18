@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dasher/ui/login/login_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../app/di/inject_dependencies.dart' as app;
 import '../common/app_build_mode.dart';
 import '../common/flavor/flavor_config.dart';
 import 'dasher_app.dart';
@@ -19,12 +17,10 @@ Future<void> runDasherApp() async {
     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-    // injection
-    _injectAppBuildMode();
-    app.injectDependencies();
+    final appBuildMode = _determineAppBuildMode();
 
     // pre-startup initialization
-    _setupErrorCapture();
+    _setupErrorCapture(appBuildMode);
     _lockOrientation();
     // final locale = await _getSavedLocale();
 
@@ -43,14 +39,8 @@ Future<void> runDasherApp() async {
   });
 }
 
-void _injectAppBuildMode() {
-  final appBuildMode = _determineAppBuildMode();
-  GetIt.instance.registerSingleton<AppBuildMode>(appBuildMode);
-}
-
-void _setupErrorCapture() {
+void _setupErrorCapture(AppBuildMode appBuildMode) {
   FlutterError.onError = (FlutterErrorDetails details) async {
-    final appBuildMode = GetIt.instance.get<AppBuildMode>();
     if (appBuildMode == AppBuildMode.debug) {
       FlutterError.dumpErrorToConsole(details);
     } else {

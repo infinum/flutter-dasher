@@ -13,7 +13,6 @@ dependencies:
   flutter_hooks: ^0.20.4
   flutter_inappwebview: ^6.0.0
   flutter_svg: ^2.0.9
-  get_it: ^7.2.0
   riverpod: ^2.4.9
   riverpod_annotation: ^2.3.3
   dio: ^5.4.0
