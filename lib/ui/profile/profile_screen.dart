@@ -4,14 +4,14 @@ import 'package:flutter_dasher/common/model/tweet.dart';
 import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
 import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweet.dart';
-import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
-import 'package:flutter_dasher/ui/profile/presenter/profile_request_presenter.dart';
+import 'package:flutter_dasher/ui/dashboard/presenter/current_user.dart';
+import 'package:flutter_dasher/ui/profile/presenter/profile_tweets.dart';
 import 'package:flutter_dasher/ui/profile/widget/header_bar_component.dart';
 import 'package:flutter_dasher/ui/profile/widget/profile_info_component.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   static Route route() {
     return MaterialPageRoute<dynamic>(
@@ -23,14 +23,14 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserPresenter);
-    final _presenter = ref.watch(profileRequestPresenter);
+    final user = ref.watch(currentUserProvider);
+    final tweets = ref.watch(profileTweetsProvider);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: RefreshIndicator(
-          onRefresh: ref.read(profileRequestPresenter).fetchProfileTweets,
+          onRefresh: () => ref.refresh(profileTweetsProvider.future),
           child: CustomScrollView(
             scrollDirection: Axis.vertical,
             slivers: [
@@ -52,27 +52,18 @@ class ProfileScreen extends ConsumerWidget {
                   followers: user.followers.toString(),
                 ),
               ),
-              _presenter.state.maybeWhen(
-                orElse: () => const _LoadingIndicator(),
-                success: (tweets) => _TweetsList(
-                  tweets: tweets,
-                ),
-                failure: (e) => SliverFillRemaining(
-                  child: Center(
-                    child: Text('Error occurred $e'),
+              switch (tweets) {
+                AsyncData(:final value) => _TweetsList(
+                    tweets: value,
                   ),
-                ),
-                initial: () => const _LoadingIndicator(),
-                loading: (tweets) {
-                  if (tweets == null) {
-                    return const _LoadingIndicator();
-                  } else {
-                    return _TweetsList(
-                      tweets: tweets,
-                    );
-                  }
-                },
-              ),
+                AsyncError(:final error, isLoading: false) => SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: Text('Error occurred: $error'),
+                    ),
+                  ),
+                _ => const _LoadingIndicator(),
+              },
             ],
           ),
         ),
