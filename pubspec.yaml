@@ -10,16 +10,16 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  flutter_hooks: ^0.18.4
+  flutter_hooks: ^0.20.4
   flutter_inappwebview: ^6.0.0
   flutter_svg: ^2.0.9
-  get_it: ^7.2.0
-  riverpod: ^1.0.3
+  riverpod: ^2.4.9
+  riverpod_annotation: ^2.3.3
   dio: ^5.4.0
   flutter_secure_storage: ^9.0.0
   japx: ^2.0.4
   loggy: ^2.0.1+1
-  hooks_riverpod: ^1.0.4
+  hooks_riverpod: ^2.4.9
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.9
   flutter_gen_runner: ^5.4.0
@@ -36,9 +36,12 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.1
   flutter_gen: ^5.4.0
-  build_runner: ^2.1.11
+  build_runner: ^2.4.8
   freezed: ^2.4.6
   json_serializable: ^6.7.1
+  custom_lint: ^0.5.8
+  riverpod_generator: ^2.3.9
+  riverpod_lint: ^2.3.7
 
 flutter_gen:
   integrations:
