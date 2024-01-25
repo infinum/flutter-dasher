@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dasher/gen/assets.gen.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
-import 'package:flutter_dasher/ui/dashboard/dashboard_screen.dart';
 import 'package:flutter_dasher/ui/login/presenter/login_request_presenter.dart';
+import 'package:flutter_dasher/ui/routing/routes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class LoginScreen extends HookConsumerWidget {
-  const LoginScreen({
-    Key? key,
-  }) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,7 +15,7 @@ class LoginScreen extends HookConsumerWidget {
 
     ref.listen<LoginRequestPresenter>(loginRequestPresenter, (_, presenter) {
       presenter.state.whenOrNull(
-        success: (_) => Navigator.of(context).push<void>(DashboardScreen.route()),
+        success: (_) => DashboardScreenRoute().go(context),
       );
     });
 

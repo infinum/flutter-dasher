@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
+import 'package:go_router/go_router.dart';
 
 class HeaderBar extends SliverPersistentHeaderDelegate {
   HeaderBar({
@@ -75,7 +76,7 @@ class HeaderBar extends SliverPersistentHeaderDelegate {
           top: 42,
           left: 14,
           child: ElevatedButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => GoRouter.of(context).pop(),
             style: ElevatedButton.styleFrom(
               minimumSize: Size.zero,
               shape: const CircleBorder(),

@@ -7,18 +7,11 @@ import 'package:flutter_dasher/ui/common/look/widget/look.dart';
 import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
 import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_provider.dart';
 import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_request_provider.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NewTweetScreen extends ConsumerWidget {
-  const NewTweetScreen({Key? key}) : super(key: key);
-
-  static Route route() {
-    return MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) {
-        return const NewTweetScreen();
-      },
-    );
-  }
+  const NewTweetScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +23,7 @@ class NewTweetScreen extends ConsumerWidget {
       presenter.state.whenOrNull(
         success: (_) {
           Future.delayed(const Duration(milliseconds: 800), () {
-            Navigator.of(context).pop();
+            GoRouter.of(context).pop();
           });
         },
       );
@@ -50,7 +43,7 @@ class NewTweetScreen extends ConsumerWidget {
                     children: [
                       PrimaryTextButton(
                         child: const Text('Cancel'),
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => GoRouter.of(context).pop(),
                       ),
                       _newTweetPresenter.state.maybeWhen(
                         orElse: () => PrimaryVariantButton(
@@ -85,7 +78,8 @@ class NewTweetScreen extends ConsumerWidget {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "What's happening?",
-                            hintStyle: Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
+                            hintStyle:
+                                Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
                           ),
                           onChanged: _presenter.onNewTweetChanged,
                         ),

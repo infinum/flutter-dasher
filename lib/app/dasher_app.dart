@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dasher/ui/routing/router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../ui/common/generic/generic_error.dart';
@@ -7,24 +8,18 @@ import '../ui/common/look/widget/look.dart';
 import '../ui/common/look/widget/look_subtree.dart';
 
 class DasherApp extends HookConsumerWidget {
-  DasherApp(this.screen, {Key? key}) : super(key: key);
-
-  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
-
-  final Widget screen;
+  const DasherApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LookSubtree(
       child: Builder(builder: (context) {
-        return MaterialApp(
+        return MaterialApp.router(
+          routerConfig: router,
           debugShowCheckedModeBanner: false,
           color: Colors.white,
-          useInheritedMediaQuery: true,
-          navigatorKey: _navigatorKey,
           theme: ThemeDataMapper.map(Look.of(context)),
           builder: _builder,
-          home: screen,
         );
       }),
     );

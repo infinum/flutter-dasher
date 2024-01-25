@@ -5,21 +5,11 @@ import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweets_list.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
 import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
-import 'package:flutter_dasher/ui/profile/profile_screen.dart';
+import 'package:flutter_dasher/ui/routing/routes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({
-    Key? key,
-  }) : super(key: key);
-
-  static Route route() {
-    return MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) {
-        return const DashboardScreen();
-      },
-    );
-  }
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +47,7 @@ class _ProfilePicture extends ConsumerWidget {
     final imageUrl = ref.watch(currentUserPresenter).imageUrl;
 
     return GestureDetector(
-      onTap: () => Navigator.of(context).push<void>(ProfileScreen.route()),
+      onTap: () => ProfileScreenRoute().go(context),
       child: CircleAvatar(
         radius: 16.0,
         backgroundImage: CachedNetworkImageProvider(imageUrl!),
