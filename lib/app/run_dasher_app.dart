@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dasher/ui/login/login_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:loggy/loggy.dart';
 
 import '../common/app_build_mode.dart';
 import '../common/flavor/flavor_config.dart';
@@ -18,6 +18,7 @@ Future<void> runDasherApp() async {
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
     final appBuildMode = _determineAppBuildMode();
+    Loggy.initLoggy(logPrinter: PrettyPrinter());
 
     // pre-startup initialization
     _setupErrorCapture(appBuildMode);
@@ -27,7 +28,7 @@ Future<void> runDasherApp() async {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     runApp(
       ProviderScope(
-        child: DasherApp(const LoginScreen()),
+        child: const DasherApp(),
       ),
     );
     FlutterNativeSplash.remove();

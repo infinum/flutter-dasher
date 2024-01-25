@@ -11,15 +11,7 @@ import 'package:flutter_dasher/ui/profile/widget/profile_info_component.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
-
-  static Route route() {
-    return MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) {
-        return const ProfileScreen();
-      },
-    );
-  }
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
