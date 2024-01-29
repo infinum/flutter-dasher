@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dasher/ui/login/login_screen.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -26,8 +25,8 @@ Future<void> runDasherApp() async {
 
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     runApp(
-      ProviderScope(
-        child: DasherApp(const LoginScreen()),
+      const ProviderScope(
+        child: DasherApp(),
       ),
     );
     FlutterNativeSplash.remove();
