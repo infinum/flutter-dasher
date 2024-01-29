@@ -4,8 +4,9 @@ import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
 import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweets_list.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
-import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
+import 'package:flutter_dasher/ui/profile/profile_screen.dart';
 import 'package:flutter_dasher/ui/routing/routes.dart';
+import 'package:flutter_dasher/user/user_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -44,7 +45,7 @@ class _ProfilePicture extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imageUrl = ref.watch(currentUserPresenter).imageUrl;
+    final imageUrl = ref.watch(userNotifierProvider).value!.imageUrl;
 
     return GestureDetector(
       onTap: () => ProfileScreenRoute().go(context),

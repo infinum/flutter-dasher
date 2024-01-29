@@ -4,10 +4,10 @@ import 'common/flavor/flavor_config.dart';
 import 'common/flavor/flavor_values.dart';
 
 void main() {
-  FlavorConfig(
+  const flavorConfig = FlavorConfig(
     flavor: Flavor.production,
     name: 'Production',
-    values: const FlavorValues(
+    values: FlavorValues(
       baseUrl: 'production URL',
       clientId: 'Uk1pRElPZnd0TlBQSDFIY2VjUUM6MTpjaQ',
       clientSecret: 'DCxJ_zS2VNXIwmyfSBNUJBzeprYLgIiNYCIkixWdpt1W7s3qd2',
@@ -16,5 +16,5 @@ void main() {
     ),
   );
 
-  runDasherApp();
+  runDasherApp(flavorConfig);
 }

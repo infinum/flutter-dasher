@@ -27,7 +27,7 @@ class DasherApp extends HookConsumerWidget {
 
   Widget _builder(BuildContext context, Widget? child) {
     _createErrorWidget(context);
-    return child ?? const SizedBox.shrink();
+    return child!;
   }
 
   void _createErrorWidget(BuildContext context) {

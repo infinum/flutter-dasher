@@ -12,13 +12,13 @@ import '../common/flavor/flavor_config.dart';
 import 'dasher_app.dart';
 
 // ignore_for_file: prefer-match-file-name
-Future<void> runDasherApp() async {
+Future<void> runDasherApp(FlavorConfig flavorConfig) async {
   await runZonedGuarded<Future<void>>(() async {
     final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
     final appBuildMode = _determineAppBuildMode();
-    Loggy.initLoggy(logPrinter: PrettyPrinter());
+    Loggy.initLoggy(logPrinter: const PrettyPrinter());
 
     // pre-startup initialization
     _setupErrorCapture(appBuildMode);
@@ -28,6 +28,9 @@ Future<void> runDasherApp() async {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     runApp(
       ProviderScope(
+        overrides: [
+          flavorConfigProvider.overrideWithValue(flavorConfig),
+        ],
         child: const DasherApp(),
       ),
     );
