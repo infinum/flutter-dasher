@@ -1,40 +1,32 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dasher/twitter/user_tweets_notifier.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_text_button.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_variant_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
-import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
-import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_provider.dart';
-import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_request_provider.dart';
+import 'package:flutter_dasher/user/user_notifier.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class NewTweetScreen extends ConsumerWidget {
-  const NewTweetScreen({Key? key}) : super(key: key);
-
-  static Route route() {
-    return MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) {
-        return const NewTweetScreen();
-      },
-    );
-  }
+class NewTweetScreen extends HookConsumerWidget {
+  const NewTweetScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _presenter = ref.watch(newTweetPresenter);
-    final _newTweetPresenter = ref.watch(newTweetRequestPresenter);
-    final imageUrl = ref.watch(currentUserPresenter).imageUrl;
+    final imageUrl = ref.watch(userNotifierProvider).value!.imageUrl;
 
-    ref.listen<NewTweetRequestPresenter>(newTweetRequestPresenter, (_, presenter) {
-      presenter.state.whenOrNull(
-        success: (_) {
-          Future.delayed(const Duration(milliseconds: 800), () {
-            Navigator.of(context).pop();
-          });
-        },
-      );
+    final postNewTweet = ref.watch(userTweetsNotifierProvider.postNewTweet);
+    ref.listen(userTweetsNotifierProvider.postNewTweet, (_, next) {
+      if (next case PostNewTweetMutationSuccess()) {
+        GoRouter.of(context).pop();
+      } else if (next case PostNewTweetMutationFailure()) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Something went wrong')));
+      }
     });
+
+    final tweetTextController = useTextEditingController();
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -50,24 +42,15 @@ class NewTweetScreen extends ConsumerWidget {
                     children: [
                       PrimaryTextButton(
                         child: const Text('Cancel'),
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => GoRouter.of(context).pop(),
                       ),
-                      _newTweetPresenter.state.maybeWhen(
-                        orElse: () => PrimaryVariantButton(
-                          child: const Text('Tweet'),
-                          onPressed: () => _newTweetPresenter.postNewTweet(),
-                        ),
-                        success: (_) => Icon(
-                          Icons.check,
-                          size: 30,
-                          color: Look.of(context).color.primary,
-                        ),
-                        failure: (_) => Icon(
-                          Icons.error_outline,
-                          size: 30,
-                          color: Look.of(context).color.error,
-                        ),
-                      ),
+                      switch (postNewTweet) {
+                        PostNewTweetMutationLoading() => const CircularProgressIndicator(),
+                        _ => PrimaryVariantButton(
+                            child: const Text('Tweet'),
+                            onPressed: () => postNewTweet(tweetTextController.text),
+                          )
+                      },
                     ],
                   ),
                   Row(
@@ -79,15 +62,16 @@ class NewTweetScreen extends ConsumerWidget {
                       ),
                       Flexible(
                         child: TextFormField(
+                          controller: tweetTextController,
                           maxLines: null,
                           textInputAction: TextInputAction.go,
                           style: Look.of(context).typography.caption,
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "What's happening?",
-                            hintStyle: Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
+                            hintStyle:
+                                Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
                           ),
-                          onChanged: _presenter.onNewTweetChanged,
                         ),
                       )
                     ],

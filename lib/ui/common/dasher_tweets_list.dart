@@ -1,64 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dasher/common/model/tweet.dart';
+import 'package:flutter_dasher/twitter/feed_notifier.dart';
+import 'package:flutter_dasher/twitter/model/tweet.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweet.dart';
-import 'package:flutter_dasher/ui/dashboard/presenter/feed_request_presenter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class DasherTweetsList extends ConsumerWidget {
-  const DasherTweetsList({
-    Key? key,
-  }) : super(key: key);
+  const DasherTweetsList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _presenter = ref.watch(feedRequestPresenter);
+    final feed = ref.watch(feedNotifierProvider);
 
     return Center(
-      child: _presenter.state.maybeWhen(
-        success: (feed) => _TweetsList(
-          feed: feed,
-        ),
-        initial: () => const CircularProgressIndicator(),
-        loading: (feed) {
-          if (feed == null) {
-            return const CircularProgressIndicator();
-          } else {
-            return _TweetsList(
-              feed: feed,
-            );
-          }
-        },
-        failure: (e) => Text('Error occurred $e'),
-        orElse: () => const CircularProgressIndicator(),
-      ),
+      child: switch (feed) {
+        AsyncData(:final value) => _TweetsList(
+            onRefresh: () => ref.refresh(feedNotifierProvider.future),
+            tweets: value,
+          ),
+        AsyncError(:final error, isLoading: false) => Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Error occurred: $error'),
+              ElevatedButton(
+                onPressed: () => ref.refresh(feedNotifierProvider),
+                child: const Text('Refresh'),
+              ),
+            ],
+          ),
+        _ => const CircularProgressIndicator(),
+      },
     );
   }
 }
 
 class _TweetsList extends ConsumerWidget {
   const _TweetsList({
-    Key? key,
-    required this.feed,
-  }) : super(key: key);
+    required this.onRefresh,
+    required this.tweets,
+  });
 
-  final List<Tweet> feed;
+  final Future<void> Function() onRefresh;
+  final List<Tweet> tweets;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
-      onRefresh: ref.read(feedRequestPresenter).fetchTweetsTimeline,
+      onRefresh: onRefresh,
       child: ListView.builder(
-        itemCount: feed.length,
+        itemCount: tweets.length,
         itemBuilder: (context, index) {
+          final tweet = tweets[index];
           return DasherTweet(
-            avatarURL: feed[index].profileImageUrl,
-            name: feed[index].name,
-            usernameTag: feed[index].username,
-            createdAt: feed[index].createdAt,
-            tweetText: feed[index].text,
-            commentsCount: feed[index].replyCount.toString(),
-            retweetsCount: feed[index].retweetCount.toString(),
-            likesCount: feed[index].likeCount.toString(),
+            avatarURL: tweet.profileImageUrl,
+            name: tweet.name,
+            usernameTag: tweet.username,
+            createdAt: tweet.createdAt,
+            tweetText: tweet.text,
+            commentsCount: tweet.replyCount.toString(),
+            retweetsCount: tweet.retweetCount.toString(),
+            likesCount: tweet.likeCount.toString(),
           );
         },
       ),

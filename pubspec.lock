@@ -584,6 +584,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      sha256: "3b40e751eaaa855179b416974d59d29669e750d2e50fcdb2b37f1cb0ca8c803a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "13.0.1"
+  go_router_builder:
+    dependency: "direct dev"
+    description:
+      name: go_router_builder
+      sha256: f84449079eb1f09f59344fbbb8cdc6a6349d8973a83746a57953bd4130d852b6
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
   graphs:
     dependency: transitive
     description:
@@ -896,6 +912,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  recase:
+    dependency: transitive
+    description:
+      name: recase
+      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   riverpod:
     dependency: "direct main"
     description:
@@ -936,6 +960,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.7"
+  riverpod_mutations_annotation:
+    dependency: "direct main"
+    description:
+      name: riverpod_mutations_annotation
+      sha256: "14316070f5f38e07222dfb477b0d45d0f8bf54dbd1c2cca0fda5fa05cd873ccf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+  riverpod_mutations_generator:
+    dependency: "direct dev"
+    description:
+      name: riverpod_mutations_generator
+      sha256: "4da047850034a990fc79c77002e278b97f7bcdbc68e01fe862da4d91e1e19826"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.9"
   rxdart:
     dependency: transitive
     description:

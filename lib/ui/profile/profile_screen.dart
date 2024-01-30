@@ -1,36 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dasher/common/model/tweet.dart';
+import 'package:flutter_dasher/authenticate/logout_notifier.dart';
+import 'package:flutter_dasher/twitter/model/tweet.dart';
+import 'package:flutter_dasher/twitter/user_tweets_notifier.dart';
 import 'package:flutter_dasher/ui/common/dasher_bottom_navigation_bar.dart';
 import 'package:flutter_dasher/ui/common/dasher_new_tweet_button.dart';
 import 'package:flutter_dasher/ui/common/dasher_tweet.dart';
-import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
-import 'package:flutter_dasher/ui/profile/presenter/profile_request_presenter.dart';
 import 'package:flutter_dasher/ui/profile/widget/header_bar_component.dart';
 import 'package:flutter_dasher/ui/profile/widget/profile_info_component.dart';
+import 'package:flutter_dasher/ui/routing/routes.dart';
+import 'package:flutter_dasher/user/user_notifier.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
-
-  static Route route() {
-    return MaterialPageRoute<dynamic>(
-      builder: (BuildContext context) {
-        return const ProfileScreen();
-      },
-    );
-  }
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(currentUserPresenter);
-    final _presenter = ref.watch(profileRequestPresenter);
+    final user = ref.watch(userNotifierProvider).value!;
+    final tweets = ref.watch(userTweetsNotifierProvider);
+
+    final logout = ref.watch(logoutNotifierProvider.logout);
+    ref.listen(logoutNotifierProvider.logout, (_, next) {
+      if (next case LogoutMutationSuccess()){
+        LoginScreenRoute().go(context);
+      }
+    });
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(
         body: RefreshIndicator(
-          onRefresh: ref.read(profileRequestPresenter).fetchProfileTweets,
+          onRefresh: () => ref.read(userTweetsNotifierProvider.future),
           child: CustomScrollView(
             scrollDirection: Axis.vertical,
             slivers: [
@@ -52,27 +53,26 @@ class ProfileScreen extends ConsumerWidget {
                   followers: user.followers.toString(),
                 ),
               ),
-              _presenter.state.maybeWhen(
-                orElse: () => const _LoadingIndicator(),
-                success: (tweets) => _TweetsList(
-                  tweets: tweets,
-                ),
-                failure: (e) => SliverFillRemaining(
-                  child: Center(
-                    child: Text('Error occurred $e'),
+              SliverToBoxAdapter(
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () => logout(),
+                    child: const Text('Logout'),
                   ),
                 ),
-                initial: () => const _LoadingIndicator(),
-                loading: (tweets) {
-                  if (tweets == null) {
-                    return const _LoadingIndicator();
-                  } else {
-                    return _TweetsList(
-                      tweets: tweets,
-                    );
-                  }
-                },
               ),
+              switch (tweets) {
+                AsyncData(:final value) => _TweetsList(
+                    tweets: value,
+                  ),
+                AsyncError(:final error, isLoading: false) => SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: Text('Error occurred: $error'),
+                    ),
+                  ),
+                _ => const _LoadingIndicator(),
+              },
             ],
           ),
         ),

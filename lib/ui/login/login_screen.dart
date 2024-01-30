@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dasher/authenticate/login_notifier.dart';
 import 'package:flutter_dasher/gen/assets.gen.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
-import 'package:flutter_dasher/ui/dashboard/dashboard_screen.dart';
-import 'package:flutter_dasher/ui/login/presenter/login_request_presenter.dart';
+import 'package:flutter_dasher/ui/routing/routes.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginScreen extends HookConsumerWidget {
-  const LoginScreen({
-    Key? key,
-  }) : super(key: key);
+class LoginScreen extends ConsumerWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _presenter = ref.watch(loginRequestPresenter);
+    final login = ref.watch(loginNotifierProvider.login);
 
-    ref.listen<LoginRequestPresenter>(loginRequestPresenter, (_, presenter) {
-      presenter.state.whenOrNull(
-        success: (_) => Navigator.of(context).push<void>(DashboardScreen.route()),
-      );
+    ref.listen(loginNotifierProvider.login, (_, next) {
+      if (next case LoginMutationSuccess()) {
+        DashboardScreenRoute().go(context);
+      }
     });
 
     return Scaffold(
@@ -48,7 +46,7 @@ class LoginScreen extends HookConsumerWidget {
                 vertical: 22,
               ),
               child: PrimaryButton(
-                onPressed: _presenter.onLoginClicked,
+                onPressed: () => login(),
                 child: const Text('Login with Twitter'),
               ),
             ),
