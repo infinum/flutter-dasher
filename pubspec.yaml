@@ -17,6 +17,7 @@ dependencies:
   riverpod_annotation: ^2.3.3
   dio: ^5.4.0
   flutter_secure_storage: ^9.0.0
+  go_router: ^13.0.1
   japx: ^2.0.4
   loggy: ^2.0.1+1
   hooks_riverpod: ^2.4.9
@@ -38,6 +39,7 @@ dev_dependencies:
   flutter_gen: ^5.4.0
   build_runner: ^2.4.8
   freezed: ^2.4.6
+  go_router_builder: ^2.4.1
   json_serializable: ^6.7.1
   custom_lint: ^0.5.8
   riverpod_generator: ^2.3.9
