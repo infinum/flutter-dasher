@@ -4,13 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_text_button.dart';
 import 'package:flutter_dasher/ui/common/buttons/primary_variant_button.dart';
 import 'package:flutter_dasher/ui/common/look/widget/look.dart';
-import 'package:flutter_dasher/ui/dashboard/presenter/current_user_presenter.dart';
+import 'package:flutter_dasher/ui/dashboard/presenter/current_user.dart';
 import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_provider.dart';
 import 'package:flutter_dasher/ui/new_tweet/presenter/new_tweet_request_provider.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NewTweetScreen extends ConsumerWidget {
-  const NewTweetScreen({Key? key}) : super(key: key);
+  const NewTweetScreen({super.key});
 
   static Route route() {
     return MaterialPageRoute<dynamic>(
@@ -24,7 +24,7 @@ class NewTweetScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _presenter = ref.watch(newTweetPresenter);
     final _newTweetPresenter = ref.watch(newTweetRequestPresenter);
-    final imageUrl = ref.watch(currentUserPresenter).imageUrl;
+    final imageUrl = ref.watch(currentUserProvider).imageUrl;
 
     ref.listen<NewTweetRequestPresenter>(newTweetRequestPresenter, (_, presenter) {
       presenter.state.whenOrNull(
@@ -85,7 +85,8 @@ class NewTweetScreen extends ConsumerWidget {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "What's happening?",
-                            hintStyle: Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
+                            hintStyle:
+                                Look.of(context).typography.caption.copyWith(color: Look.of(context).color.symbolGray),
                           ),
                           onChanged: _presenter.onNewTweetChanged,
                         ),
